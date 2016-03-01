@@ -94,4 +94,13 @@ public class Avion extends Agent{
         msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
         send(msg);
     }
+    
+    @Override
+    public String toString(){
+      return "Pista VectorDirector: ("+getVectorDirector().x+","+getVectorDirector().y+","+getVectorDirector().z+")"+
+           "\nPista PosicionActual: ("+getPosicionActual().x+","+getPosicionActual().y+")"+
+           "\nPista CombustibleActual: "+getCombustibleActual()+
+           "\nPista CombustibleXStep: "+getCombustibleXStep()+
+           "\nPista timeStep: "+getTimeStep()+"\n";
+    }
 }
