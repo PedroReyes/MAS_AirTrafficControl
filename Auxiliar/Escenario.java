@@ -31,6 +31,7 @@ public class Escenario {
 
     private final String formatLineSeparator = " ";
     private final String formatStepTimeSeparator = "st";
+    private final String formatAvionSeparator = "av";
 
     private int numeroFilasAeropuerto;
     private int numeroColumnasAeropuerto;
@@ -106,21 +107,29 @@ public class Escenario {
                     stepTime = Integer.valueOf(line.substring(2));
                 } else {
                     if (stepTime == null) {
-                        throw new IllegalArgumentException("El formato del documento es erroneo");
+                        throw new IllegalArgumentException("El formato del documento es erroneo: se pensó que venía una linea tipo StepTime y no fue así.");
                     }
                     // Conseguimos la lista actual de aviones en este steptime
                     List<Avion> stepTimeListAviones = entradaSimuladaAviones.get(stepTime);
+                    stepTimeListAviones = stepTimeListAviones == null ? new LinkedList<>() : stepTimeListAviones;
 
                     // Es un nuevo avion
-                    Avion avion = new Avion();
                     String[] newLineAvion = line.split(formatLineSeparator);
 
-                    Point posicionActual = new Point(Integer.valueOf(newLineAvion[0]), Integer.valueOf(newLineAvion[1]));
-                    int combustibleActual = Integer.valueOf(newLineAvion[2]);
-                    int combistibleGastadoPorSteptime = Integer.valueOf(newLineAvion[3]);
+                    if (newLineAvion[0].contains(formatAvionSeparator)) {
+                        Vector posicionActual = new Vector(Integer.valueOf(newLineAvion[1]), Integer.valueOf(newLineAvion[2]), null);
+                        int combustibleActual = Integer.valueOf(newLineAvion[3]);
+                        double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
 
-                    entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
+                        System.out.println(posicionActual);
+                        System.out.println(combustibleActual);
+                        System.out.println(combustibleGastadoPorSteptime);
 
+                        stepTimeListAviones.add(new Avion(posicionActual, combustibleActual, combustibleGastadoPorSteptime));
+                        entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
+                    } else {
+                        throw new IllegalArgumentException("El formato del documento es erroneo: una linea no contiene av");
+                    }
                 }
             }
         } catch (IOException ex) {
@@ -150,20 +159,16 @@ public class Escenario {
         for (Pista pista : pistas) {
             result = result + pista.toString();
         }
-
         // Los aviones que llegan
-        Iterator it = entradaSimuladaAviones.entrySet().iterator();
-        while (it.hasNext()) {
+        for (Map.Entry pair : entradaSimuladaAviones.entrySet()) {
             // Cogemos el par <step, aviones>
-            Map.Entry pair = (Map.Entry) it.next();
-
             // Mostramos los aviones para este stepTime
             result = result + "=============";
             result = result + "Step time: " + pair.getKey();
             result = result + "=============";
             List<Avion> stepTimeAviones = (List<Avion>) pair.getValue();
             for (Avion next : stepTimeAviones) {
-                result = result + next.toString();
+                result = result + next.toString() + "\n";
             }
         }
         return result;
