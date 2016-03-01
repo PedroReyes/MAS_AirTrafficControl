@@ -6,10 +6,13 @@
 package Input;
 
 import Auxiliar.Escenario;
+import Sistema.Avion;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
+import java.util.List;
+import java.util.Map;
 /**
  *
  * @author pedro
@@ -54,16 +57,25 @@ public class ControlTemporal extends Agent{
     protected void setup() {
         //Leo el escenario y me cojo el map
         
-        TickerBehaviour controlTemp = new TickerBehaviour(this, 1000) {
+        TickerBehaviour controlTemp;
+        controlTemp = new TickerBehaviour(this, 1000) {
             @Override
             protected void onTick() {
-                //Miro en el map que tengo en este tick
-                escenario.getEntradaSimuladaAviones();
-                //Si tengo que generar nuevos aviones
+                timeStep = getTickCount();
+                
+                // Miro en el escenario si tengo que generar nuevos aviones en este tick
+                Map<Integer, List<Avion>> simulacion = escenario.getEntradaSimuladaAviones();
+                List<Avion> aviones = simulacion.get(timeStep);
+                
+                // Si la lista no es vacia, inicializo los aviones
+                if(!aviones.isEmpty()){
+                    aviones.stream().forEach((avion) -> {
+                        inicializacionAgentes(avion);
+                    });
+                }
                 //inicializacionAgentes();
                 
                 //Mando nuevo timeStep
-                timeStep = getTickCount();
                 System.out.println("Agent " + myAgent.getLocalName() + ": tick=" + timeStep);
                 mandarMensajes();
                 
@@ -75,7 +87,7 @@ public class ControlTemporal extends Agent{
     
     @Override
     public String toString(){
-      return "ControlTemporal Escenario: "+
-           "\nControlTemporal TimeStep: "+getTimeStep()+"\n";
+      return "ControlTemporal: ["+getEscenario()+
+           ","+getTimeStep()+"]\n";
     }
 }

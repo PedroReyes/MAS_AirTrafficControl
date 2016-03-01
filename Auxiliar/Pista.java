@@ -77,10 +77,10 @@ public class Pista {
     
     @Override
     public String toString(){
-      return "Pista CoordenadaX: "+getCoordenadaX()+
-           "\nPista CoordenadaY: "+getCoordenadaY()+
-           "\nPista EntradaX: "+getEntradaX()+
-           "\nPista EntradaY: "+getEntradaY()+
-           "\nPista StepsAterrizaje: "+getStepsAterrizaje()+"\n";
+      return "Pista: ["+getCoordenadaX()+
+            ","+getCoordenadaY()+
+            ","+getEntradaX()+
+            ","+getEntradaY()+
+            ","+getStepsAterrizaje()+"]\n";
     }
 }
