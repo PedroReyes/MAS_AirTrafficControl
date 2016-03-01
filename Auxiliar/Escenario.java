@@ -75,7 +75,6 @@ public class Escenario {
             // Next lines: las pistas (donde se situan, por donde se entra y cuantos step se queda parada cuando un avion entra en ella)
             pistas = new LinkedList<>();
             for (int i = 0; i < numeroPistas; i++) {
-                System.out.println("Nueva pista");
                 // La pista que vamos a añadir
                 Pista newPista;
 
@@ -121,10 +120,6 @@ public class Escenario {
                             Vector posicionActual = new Vector(Integer.valueOf(newLineAvion[1]), Integer.valueOf(newLineAvion[2]), null);
                             int combustibleActual = Integer.valueOf(newLineAvion[3]);
                             double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
-
-                            System.out.println(posicionActual);
-                            System.out.println(combustibleActual);
-                            System.out.println(combustibleGastadoPorSteptime);
 
                             stepTimeListAviones.add(new Avion(posicionActual, combustibleActual, combustibleGastadoPorSteptime));
                             entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
