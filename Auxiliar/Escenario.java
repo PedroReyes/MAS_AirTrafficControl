@@ -100,6 +100,7 @@ public class Escenario {
             // Next lines: los aviones (cuando llegan, por donde, con cuánto combustible y cuánto gastan por step)
             entradaSimuladaAviones = new HashMap<>();
             Integer stepTime = null;
+            int idAvion = 0;
             while ((line = br.readLine()) != null) {
                 if (!line.isEmpty()) {
                     // Es un nuevo step time
@@ -121,8 +122,12 @@ public class Escenario {
                             int combustibleActual = Integer.valueOf(newLineAvion[3]);
                             double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
 
-                            stepTimeListAviones.add(new Avion(posicionActual, combustibleActual, combustibleGastadoPorSteptime));
+                            // Añadimos el avion
+                            stepTimeListAviones.add(new Avion(formatAvionSeparator + String.valueOf(idAvion), posicionActual, combustibleActual, combustibleGastadoPorSteptime));
                             entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
+
+                            // Actualizamos el id
+                            idAvion++;
                         } else {
                             throw new IllegalArgumentException("El formato del documento es erroneo: una linea no contiene av");
                         }
