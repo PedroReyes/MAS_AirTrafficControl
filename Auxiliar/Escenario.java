@@ -102,33 +102,35 @@ public class Escenario {
             entradaSimuladaAviones = new HashMap<>();
             Integer stepTime = null;
             while ((line = br.readLine()) != null) {
-                // Es un nuevo step time
-                if (line.contains(formatStepTimeSeparator)) {
-                    stepTime = Integer.valueOf(line.substring(2));
-                } else {
-                    if (stepTime == null) {
-                        throw new IllegalArgumentException("El formato del documento es erroneo: se pensó que venía una linea tipo StepTime y no fue así.");
-                    }
-                    // Conseguimos la lista actual de aviones en este steptime
-                    List<Avion> stepTimeListAviones = entradaSimuladaAviones.get(stepTime);
-                    stepTimeListAviones = stepTimeListAviones == null ? new LinkedList<>() : stepTimeListAviones;
-
-                    // Es un nuevo avion
-                    String[] newLineAvion = line.split(formatLineSeparator);
-
-                    if (newLineAvion[0].contains(formatAvionSeparator)) {
-                        Vector posicionActual = new Vector(Integer.valueOf(newLineAvion[1]), Integer.valueOf(newLineAvion[2]), null);
-                        int combustibleActual = Integer.valueOf(newLineAvion[3]);
-                        double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
-
-                        System.out.println(posicionActual);
-                        System.out.println(combustibleActual);
-                        System.out.println(combustibleGastadoPorSteptime);
-
-                        stepTimeListAviones.add(new Avion(posicionActual, combustibleActual, combustibleGastadoPorSteptime));
-                        entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
+                if (!line.isEmpty()) {
+                    // Es un nuevo step time
+                    if (line.contains(formatStepTimeSeparator)) {
+                        stepTime = Integer.valueOf(line.substring(2));
                     } else {
-                        throw new IllegalArgumentException("El formato del documento es erroneo: una linea no contiene av");
+                        if (stepTime == null) {
+                            throw new IllegalArgumentException("El formato del documento es erroneo: se pensó que venía una linea tipo StepTime y no fue así.");
+                        }
+                        // Conseguimos la lista actual de aviones en este steptime
+                        List<Avion> stepTimeListAviones = entradaSimuladaAviones.get(stepTime);
+                        stepTimeListAviones = stepTimeListAviones == null ? new LinkedList<>() : stepTimeListAviones;
+
+                        // Es un nuevo avion
+                        String[] newLineAvion = line.split(formatLineSeparator);
+
+                        if (newLineAvion[0].contains(formatAvionSeparator)) {
+                            Vector posicionActual = new Vector(Integer.valueOf(newLineAvion[1]), Integer.valueOf(newLineAvion[2]), null);
+                            int combustibleActual = Integer.valueOf(newLineAvion[3]);
+                            double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
+
+                            System.out.println(posicionActual);
+                            System.out.println(combustibleActual);
+                            System.out.println(combustibleGastadoPorSteptime);
+
+                            stepTimeListAviones.add(new Avion(posicionActual, combustibleActual, combustibleGastadoPorSteptime));
+                            entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
+                        } else {
+                            throw new IllegalArgumentException("El formato del documento es erroneo: una linea no contiene av");
+                        }
                     }
                 }
             }
@@ -165,7 +167,7 @@ public class Escenario {
             // Mostramos los aviones para este stepTime
             result = result + "=============";
             result = result + "Step time: " + pair.getKey();
-            result = result + "=============";
+            result = result + "=============\n";
             List<Avion> stepTimeAviones = (List<Avion>) pair.getValue();
             for (Avion next : stepTimeAviones) {
                 result = result + next.toString() + "\n";
