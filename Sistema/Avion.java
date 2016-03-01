@@ -101,6 +101,6 @@ public class Avion extends Agent{
            ","+getPosicionActual()+
            ","+getCombustibleActual()+
            ","+getCombustibleXStep()+
-           ","+getTimeStep()+"]\n";
+           ","+getTimeStep()+"]\n"; 
     }
 }
