@@ -11,11 +11,11 @@ package Auxiliar;
  */
 public class Vector {
 
-    public int x;
-    public int y;
-    public int z;
+    public Integer x;
+    public Integer y;
+    public Integer z;
 
-    public Vector(int x, int y, int z) {
+    public Vector(Integer x, Integer y, Integer z) {
         this.x = x;
         this.y = y;
         this.z = z;
