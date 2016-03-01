@@ -27,6 +27,7 @@ public class AuxiliarMain {
             System.out.println(fin.getCanonicalFile());
             Escenario escenario = new Escenario();
             escenario.readEscenario(fin.getCanonicalPath());
+            System.out.println(escenario);
         } catch (IOException ex) {
             Logger.getLogger(AuxiliarMain.class.getName()).log(Level.SEVERE, null, ex);
         }
