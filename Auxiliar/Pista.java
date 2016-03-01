@@ -8,6 +8,7 @@ package Auxiliar;
 /**
  *
  * @author j_sto
+ *
  */
 public class Pista {
 
@@ -26,44 +27,44 @@ public class Pista {
         this.entradaY = entY;
         this.stepsAterrizaje = time;
     }
-    
-    public void setCoordenadaX(int coordenadaX){
+
+    public void setCoordenadaX(int coordenadaX) {
         this.coordenadaX = coordenadaX;
     }
-    
-    public int getCoordenadaX(){
+
+    public int getCoordenadaX() {
         return this.coordenadaX;
     }
-    
-    public void setCoordenadaY(int coordenadaY){
+
+    public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
     }
-    
-    public int getCoordenadaY(){
+
+    public int getCoordenadaY() {
         return this.coordenadaY;
     }
-    
-    public void setEntradaX(int entradaX){
+
+    public void setEntradaX(int entradaX) {
         this.entradaX = entradaX;
     }
-    
-    public int getEntradaX(){
+
+    public int getEntradaX() {
         return this.entradaX;
     }
-    
-    public void setEntradaY(int entradaY){
+
+    public void setEntradaY(int entradaY) {
         this.entradaY = entradaY;
     }
-    
-    public int getEntradaY(){
+
+    public int getEntradaY() {
         return this.entradaY;
     }
-    
-    public void setStepsAterrizaje(int stepsAterrizaje){
+
+    public void setStepsAterrizaje(int stepsAterrizaje) {
         this.stepsAterrizaje = stepsAterrizaje;
     }
-    
-    public int getStepsAterrizaje(){
+
+    public int getStepsAterrizaje() {
         return this.stepsAterrizaje;
     }
 }
