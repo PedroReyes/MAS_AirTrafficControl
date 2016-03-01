@@ -20,6 +20,10 @@ public class Pista {
 
     private int stepsAterrizaje;
 
+    public Pista() {
+        
+    }
+    
     public Pista(int coorX, int coorY, int entX, int entY, int time) {
         this.coordenadaX = coorX;
         this.coordenadaY = coorY;

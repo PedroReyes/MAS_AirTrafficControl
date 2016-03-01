@@ -5,10 +5,12 @@
  */
 package Sistema;
 
+import jade.core.Agent;
+
 /**
  *
  * @author pedro
  */
-public class Avion {
+public class Avion extends Agent{
 
 }
