@@ -32,6 +32,9 @@ public class Pista {
         this.stepsAterrizaje = time;
     }
 
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
     public void setCoordenadaX(int coordenadaX) {
         this.coordenadaX = coordenadaX;
     }

@@ -6,8 +6,10 @@
 package Input;
 
 import Auxiliar.Escenario;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
+import jade.lang.acl.ACLMessage;
 /**
  *
  * @author pedro
@@ -16,16 +18,30 @@ public class ControlTemporal extends Agent{
     private int timeStep;
     private Escenario escenario;
 
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
     public void setTimeStep(int time) {
         this.timeStep = time;
+    }
+    
+    public int getTimeStep() {
+        return this.timeStep;
     }
     
     public void setEscenario(Escenario escenario) {
         this.escenario = escenario;
     }
     
-    public void mandarMensajes() {
-
+    public Escenario getEscenario() {
+        return this.escenario;
+    }
+    
+    public void mandarMensajes(String receiver, String content) {
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.setContent(content);
+        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
+        send(msg);
     }
 
     public void inicializacionAgentes(Agent agente) {
@@ -54,5 +70,11 @@ public class ControlTemporal extends Agent{
         };
 
         addBehaviour(controlTemp);
+    }
+    
+    @Override
+    public String toString(){
+      return "ControlTemporal Escenario: "+
+           "\nControlTemporal TimeStep: "+getTimeStep()+"\n";
     }
 }
