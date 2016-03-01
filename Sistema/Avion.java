@@ -15,7 +15,6 @@ import jade.lang.acl.ACLMessage;
  * @author pedro
  */
 public class Avion extends Agent{
-    private String id;
     private Vector vectorDirector;
     private Vector posicionActual;
     private int combustibleActual;
@@ -26,33 +25,21 @@ public class Avion extends Agent{
         
     }
     
-    public Avion(String id, Vector posicion, int comb, double combXStep) {
-        this.id = id;
+    public Avion(Vector posicion, int comb, double combXStep) {
         this.posicionActual = posicion;
         this.combustibleActual = comb;
         this.combustibleXStep = combXStep;
     }
     
-    public Avion(String id, Vector vector, Vector posicion, int comb, double combXStep, int time) {
-        this.id = id;
+    public Avion(Vector vector, Vector posicion, int comb, double combXStep, int time) {
         this.vectorDirector = vector;
         this.posicionActual = posicion;
-        this.combustibleActual = comb;
-        this.combustibleXStep = combXStep;
         this.timeStep = time;
     }
     
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-    public void setID(String id) {
-        this.id = id;
-    }
-    
-    public String getID() {
-        return this.id;
-    }
-    
     public void setVectorDirector(Vector vector) {
         this.vectorDirector = vector;
     }
@@ -110,8 +97,7 @@ public class Avion extends Agent{
     
     @Override
     public String toString(){
-      return "Avion: ["+getID()+
-           ","+getVectorDirector()+
+      return "Avion: ["+getVectorDirector()+
            ","+getPosicionActual()+
            ","+getCombustibleActual()+
            ","+getCombustibleXStep()+

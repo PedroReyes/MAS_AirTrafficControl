@@ -22,7 +22,7 @@ public class AuxiliarMain {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            String filePath = "C:\\Users\\j_sto\\Documents\\GitHub\\MAS_AirTrafficControl\\Auxiliar\\Simulacion.txt";
+            String filePath = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Auxiliar/Simulacion.txt";
             File fin = new File(filePath);//dir.getCanonicalPath() + File.separator + "Auxiliar" + File.separator + "Simulacion.txt");
             System.out.println(fin.getCanonicalFile());
             Escenario escenario = new Escenario();
