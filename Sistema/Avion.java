@@ -5,26 +5,33 @@
  */
 package Sistema;
 
+import Auxiliar.Vector;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
-import java.awt.Point;
-import java.util.Vector;
 
 /**
  *
  * @author pedro
  */
 public class Avion extends Agent{
-    private Vector<Integer> vectorDirector;
-    private Point posicionActual;
+    private Vector vectorDirector;
+    private Vector posicionActual;
+    private int combustibleActual;
+    private double combustibleXStep;
     private int timeStep;
     
     public Avion() {
         
     }
     
-    public Avion(Vector<Integer> vector, Point posicion, int time) {
+    public Avion(Vector posicion, int comb, double combXStep) {
+        this.posicionActual = posicion;
+        this.combustibleActual = comb;
+        this.combustibleXStep = combXStep;
+    }
+    
+    public Avion(Vector vector, Vector posicion, int comb, double combXStep, int time) {
         this.vectorDirector = vector;
         this.posicionActual = posicion;
         this.timeStep = time;
@@ -33,20 +40,36 @@ public class Avion extends Agent{
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-    public void setVectorDirector(Vector<Integer> vector) {
+    public void setVectorDirector(Vector vector) {
         this.vectorDirector = vector;
     }
     
-    public Vector<Integer> getVectorDirector() {
+    public Vector getVectorDirector() {
         return this.vectorDirector;
     }
     
-    public void setPosicionActual(Point posicion) {
+    public void setPosicionActual(Vector posicion) {
         this.posicionActual = posicion;
     }
     
-    public Point getPosicionActual() {
+    public Vector getPosicionActual() {
         return this.posicionActual;
+    }
+    
+    public void setCombustibleActual(int comb) {
+        this.combustibleActual = comb;
+    }
+    
+    public int getCombustibleActual() {
+        return this.combustibleActual;
+    }
+    
+    public void setCombustibleXStep(double combXStep) {
+        this.combustibleXStep = combXStep;
+    }
+    
+    public double getCombustibleXStep() {
+        return this.combustibleXStep;
     }
     
     public void setTimeStep(int time) {

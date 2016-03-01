@@ -37,10 +37,10 @@ public class ControlTemporal extends Agent{
         return this.escenario;
     }
     
-    public void mandarMensajes(String receiver, String content) {
+    public void mandarMensajes() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(content);
-        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
+        msg.setContent(String.valueOf(timeStep));
+        msg.addReceiver(new AID("todos los receptores. HUM!!", AID.ISLOCALNAME));
         send(msg);
     }
 
@@ -58,6 +58,7 @@ public class ControlTemporal extends Agent{
             @Override
             protected void onTick() {
                 //Miro en el map que tengo en este tick
+                escenario.getEntradaSimuladaAviones();
                 //Si tengo que generar nuevos aviones
                 //inicializacionAgentes();
                 
