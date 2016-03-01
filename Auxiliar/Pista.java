@@ -71,4 +71,13 @@ public class Pista {
     public int getStepsAterrizaje() {
         return this.stepsAterrizaje;
     }
+    
+    @Override
+    public String toString(){
+      return "Pista CoordenadaX: "+getCoordenadaX()+
+           "\nPista CoordenadaY: "+getCoordenadaY()+
+           "\nPista EntradaX: "+getEntradaX()+
+           "\nPista EntradaY: "+getEntradaY()+
+           "\nPista StepsAterrizaje: "+getStepsAterrizaje()+"\n";
+    }
 }
