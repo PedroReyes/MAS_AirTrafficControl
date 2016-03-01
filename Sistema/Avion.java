@@ -97,8 +97,8 @@ public class Avion extends Agent{
     
     @Override
     public String toString(){
-      return "Pista VectorDirector: ("+getVectorDirector().x+","+getVectorDirector().y+","+getVectorDirector().z+")"+
-           "\nPista PosicionActual: ("+getPosicionActual().x+","+getPosicionActual().y+")"+
+      return "Pista VectorDirector: "+getVectorDirector()+
+           "\nPista PosicionActual: "+getPosicionActual()+
            "\nPista CombustibleActual: "+getCombustibleActual()+
            "\nPista CombustibleXStep: "+getCombustibleXStep()+
            "\nPista timeStep: "+getTimeStep()+"\n";
