@@ -6,6 +6,7 @@
 package Auxiliar;
 
 import Sistema.Avion;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,10 +99,27 @@ public class Escenario {
 
             // Next lines: los aviones (cuando llegan, por donde, con cuánto combustible y cuánto gastan por step)
             entradaSimuladaAviones = new HashMap<>();
+            Integer stepTime = null;
             while ((line = br.readLine()) != null) {
+                // Es un nuevo step time
                 if (line.contains(formatStepTimeSeparator)) {
-
+                    stepTime = Integer.valueOf(line.substring(2));
                 } else {
+                    if (stepTime == null) {
+                        throw new IllegalArgumentException("El formato del documento es erroneo");
+                    }
+                    // Conseguimos la lista actual de aviones en este steptime
+                    List<Avion> stepTimeListAviones = entradaSimuladaAviones.get(stepTime);
+
+                    // Es un nuevo avion
+                    Avion avion = new Avion();
+                    String[] newLineAvion = line.split(formatLineSeparator);
+
+                    Point posicionActual = new Point(Integer.valueOf(newLineAvion[0]), Integer.valueOf(newLineAvion[1]));
+                    int combustibleActual = Integer.valueOf(newLineAvion[2]);
+                    int combistibleGastadoPorSteptime = Integer.valueOf(newLineAvion[3]);
+
+                    entradaSimuladaAviones.put(stepTime, stepTimeListAviones);
 
                 }
             }
