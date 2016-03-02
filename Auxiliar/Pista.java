@@ -6,9 +6,7 @@
 package Auxiliar;
 
 /**
- *
- * @author j_sto
- *
+ * @author Javier Moreno
  */
 public class Pista {
 
@@ -20,6 +18,9 @@ public class Pista {
 
     private int stepsAterrizaje;
 
+    // =========================================================================
+    // CONSTRUCTORS
+    // =========================================================================
     public Pista() {
         
     }
@@ -30,6 +31,18 @@ public class Pista {
         this.entradaX = entX;
         this.entradaY = entY;
         this.stepsAterrizaje = time;
+    }
+    
+    // =========================================================================
+    // ToString
+    // =========================================================================
+    @Override
+    public String toString(){
+      return "Pista: ["+getCoordenadaX()+
+            ","+getCoordenadaY()+
+            ","+getEntradaX()+
+            ","+getEntradaY()+
+            ","+getStepsAterrizaje()+"]\n";
     }
 
     // =========================================================================
@@ -73,14 +86,5 @@ public class Pista {
 
     public int getStepsAterrizaje() {
         return this.stepsAterrizaje;
-    }
-    
-    @Override
-    public String toString(){
-      return "Pista: ["+getCoordenadaX()+
-            ","+getCoordenadaY()+
-            ","+getEntradaX()+
-            ","+getEntradaY()+
-            ","+getStepsAterrizaje()+"]\n";
     }
 }

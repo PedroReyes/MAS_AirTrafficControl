@@ -5,39 +5,22 @@
  */
 package Sistema;
 
-import Auxiliar.Vector;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author pedro
+ * @author Javier Moreno
  */
 public class AlmacenDeInformacion extends Agent{
     private List<Avion> aviones;
     private List<Boolean> modificado;
     
     // =========================================================================
-    // GETTERS & SETTERS
+    // AGENT
     // =========================================================================
-    public void setAviones(List<Avion> avion) {
-        this.aviones = avion;
-    }
-    
-    public List<Avion> getAviones() {
-        return this.aviones;
-    }
-    
-    public void actualizarInformacion(){
-        
-    }
-    
-    public void informar(String agente){
-        
-    }
-    
     @Override
     public void setup() {
         SimpleBehaviour almInformacion = new SimpleBehaviour(this) {
@@ -85,9 +68,31 @@ public class AlmacenDeInformacion extends Agent{
         addBehaviour(almInformacion);
     }
     
+    // =========================================================================
+    // ToString
+    // =========================================================================
     @Override
     public String toString(){
       return "AlmacenDeInformacion: ["+
            " "+"]\n";
+    }
+    
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
+    public void setAviones(List<Avion> avion) {
+        this.aviones = avion;
+    }
+    
+    public List<Avion> getAviones() {
+        return this.aviones;
+    }
+    
+    public void actualizarInformacion(){
+        
+    }
+    
+    public void informar(String agente){
+        
     }
 }

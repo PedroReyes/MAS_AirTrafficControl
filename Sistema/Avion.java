@@ -11,8 +11,7 @@ import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 
 /**
- *
- * @author pedro
+ * @author Javier Moreno
  */
 public class Avion extends Agent{
     private String id;
@@ -22,6 +21,9 @@ public class Avion extends Agent{
     private double combustibleXStep;
     private int timeStep;
     
+    // =========================================================================
+    // CONSTRUCTORS
+    // =========================================================================
     public Avion() {
         
     }
@@ -40,6 +42,49 @@ public class Avion extends Agent{
         this.combustibleActual = comb;
         this.combustibleXStep = combXStep;
         this.timeStep = time;
+    }
+    
+    // =========================================================================
+    // AGENT
+    // =========================================================================
+    protected void setup() {
+        Object[] args = getArguments();
+        setID((String) args[0]);
+        setPosicionActual((Vector) args[1]);
+        setCombustibleActual((int) args[2]);
+        setCombustibleXStep((double) args[3]);
+        setTimeStep((int) args[4]);
+    }
+    
+    // =========================================================================
+    // AUXILIARY METHODS
+    // =========================================================================
+    public void actualizarInformacion(){
+        
+    }
+    
+    public void actualizarPosicion(){
+        
+    }
+    
+    public void mandarNuevaPosicion(String receiver){
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.setContent("");
+        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
+        send(msg);
+    }
+    
+    // =========================================================================
+    // ToString
+    // =========================================================================
+    @Override
+    public String toString(){
+      return "Avion: ["+getID()+
+           ","+getVectorDirector()+
+           ","+getPosicionActual()+
+           ","+getCombustibleActual()+
+           ","+getCombustibleXStep()+
+           ","+getTimeStep()+"]\n"; 
     }
     
     // =========================================================================
@@ -91,30 +136,5 @@ public class Avion extends Agent{
     
     public int getTimeStep() {
         return this.timeStep;
-    }
-    
-    public void actualizarInformacion(){
-        
-    }
-    
-    public void actualizarPosicion(){
-        
-    }
-    
-    public void mandarNuevaPosicion(String receiver){
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent("");
-        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
-        send(msg);
-    }
-    
-    @Override
-    public String toString(){
-      return "Avion: ["+getID()+
-           ","+getVectorDirector()+
-           ","+getPosicionActual()+
-           ","+getCombustibleActual()+
-           ","+getCombustibleXStep()+
-           ","+getTimeStep()+"]\n"; 
     }
 }

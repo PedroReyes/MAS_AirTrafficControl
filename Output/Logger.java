@@ -12,8 +12,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
- *
- * @author pedro
+ * @author Javier Moreno
  */
 public class Logger extends Agent{
     private FileWriter fichero;
