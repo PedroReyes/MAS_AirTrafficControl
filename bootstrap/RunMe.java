@@ -36,8 +36,13 @@ public class RunMe {
         ///////////////////////////////////////////////////////////////////////////
         //crearea propriu-zisa a unui agent		
         try {
-
-            AgentController a = home.createNewAgent("a2", ReceiverAgent.class.getName(), new Object[0]);
+            Object[] arguments = new Object[4];
+            arguments[0] = "avion1";
+            arguments[1] = 102.0;
+            arguments[2] = "despega";
+            arguments[3] = 12.01;
+            
+            AgentController a = home.createNewAgent("a2", ReceiverAgent.class.getName(), arguments);
             a.start();// a pornit receiverul ( acum porneste metoda setup() a agentului )
 
             a = home.createNewAgent("a1", SenderAgent.class.getName(), new Object[0]);

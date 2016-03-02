@@ -15,7 +15,15 @@ import jade.lang.acl.*;
 public class ReceiverAgent extends Agent {
 
     protected void setup() {
-
+        Object[] args = getArguments();
+        String id = (String) args[0];
+        double combustible = (double) args[1];
+        String accion = (String) args[2];
+        double combustibleXStep = (double) args[3];
+        
+        System.out.println("Argumentos:");
+        System.out.println(id+" -- "+combustible+" -- "+accion+" -- "+combustibleXStep);
+        
         addBehaviour(new ReceiverBehaviourReceivePing(this));
 
     }
