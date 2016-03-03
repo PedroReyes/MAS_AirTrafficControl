@@ -7,10 +7,12 @@ package Input;
 
 import Auxiliar.Escenario;
 import Sistema.Avion;
-import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.TickerBehaviour;
+import jade.domain.AMSService;
+import jade.domain.FIPAAgentManagement.AMSAgentDescription;
+import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.lang.acl.ACLMessage;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
@@ -44,15 +46,15 @@ public class ControlTemporal extends Agent {
                     // Crear ATC
                     AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), new Object[0]);
                     a.start();
-                    
+
                     // Crear AlmacenDeInformacion
                     a = home.createNewAgent("adi", Sistema.AlmacenDeInformacion.class.getName(), new Object[0]);
                     a.start();
-                    
+
                     // Crear InterfazGrafica
-                    a = home.createNewAgent("graph", Output.InterfazGrafica.class.getName(), new Object[0]);
+                    a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), new Object[0]);
                     a.start();
-                    
+
                     // Crear Logger
                     a = home.createNewAgent("log", Output.Logger.class.getName(), new Object[0]);
                     a.start();
@@ -92,16 +94,25 @@ public class ControlTemporal extends Agent {
     // AUXILIARY METHODS
     // =========================================================================
     public void mandarMensajes() {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(String.valueOf(timeStep));
-        msg.addReceiver(new AID("todos los receptores. HUM!!", AID.ISLOCALNAME));
-        send(msg);
+        String prefix = "( agent-identifier :name ";
+        AMSAgentDescription[] agents = null;
+        
+        try {
+            SearchConstraints c = new SearchConstraints();
+            c.setMaxResults(new Long(-1));
+            agents = AMSService.search(this, new AMSAgentDescription(), c);
+        } catch (Exception e) {
+        }
 
-        /*Se puede hacer por broadcast
-          Lo que habria que hacer es poner un template para que
-          aquellos que reciben mensajes pero no de este, tal como
-          AlmacenDeInformacion o InterfazGrafica, no los tengan en cuenta
-         */
+        for (AMSAgentDescription agent : agents) {
+            String agentID = agent.getName().toString();
+            if(agentID.startsWith(prefix+"atc") || agentID.startsWith(prefix+"avion")){
+                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                msg.setContent(String.valueOf(timeStep));
+                msg.addReceiver(agent.getName());
+                send(msg);
+            }
+        }
     }
 
     public void inicializacionAgentes(Avion agente) {
