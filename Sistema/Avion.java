@@ -64,12 +64,25 @@ public class Avion extends Agent {
         msg.setContent("ADD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
         msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
         send(msg);
+        
+        MessageTemplate mControlTemp = MessageTemplate.MatchSender(new AID("tmp", AID.ISLOCALNAME));
+        MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
 
         addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
                 // Primero se bloquea esperando un mensaje de ControlTemporal
-                addBehaviour(new ReceiveBehaviour(this.myAgent, "temporal"));
+                boolean mensajeRecibido = false;
+                
+                while (!mensajeRecibido) {
+                    ACLMessage msg = myAgent.receive(mControlTemp);
+                    if (msg != null) {
+                        setTimeStep(Integer.parseInt(msg.getContent())); 
+                        mensajeRecibido = true;
+                    } else {
+                        block();
+                    }
+                }
                 
                 // Actualiza su posicion y combustible
                 actualizarPosicion();
@@ -79,40 +92,22 @@ public class Avion extends Agent {
                 send(msg);
 
                 // Espera una correccion de vuelo
-                addBehaviour(new ReceiveBehaviour(this.myAgent, "adi"));
+                mensajeRecibido = false;
+                
+                while (!mensajeRecibido) {
+                    msg = myAgent.receive(mAlmacenDInf);
+                    if (msg != null) {
+                        actualizarInformacion(msg.getContent());
+                        mensajeRecibido = true;
+                    } else {
+                        block();
+                    }
+                }
             }
         }
         );
     }
 
-    // =========================================================================
-    // AUXILIARY BEHAVIOUR
-    // =========================================================================
-    class ReceiveBehaviour extends OneShotBehaviour {
-        private final Agent padre;
-        private final String sender;
-
-        public ReceiveBehaviour(Agent avion, String sender) {
-            this.padre = avion;
-            this.sender = sender;
-        }
-
-        @Override
-        public void action() {
-            MessageTemplate mt = MessageTemplate.MatchSender(new AID(sender, AID.ISLOCALNAME));
-            ACLMessage msg = myAgent.receive(mt);
-            if (msg != null) {
-                if (sender.equals("temporal")){
-                    ((Avion) padre).setTimeStep(Integer.parseInt(msg.getContent()));  
-                } else {
-                    ((Avion) padre).actualizarInformacion(msg.getContent());
-                }
-            } else {
-                block();
-            }
-        }
-    }
-    
     // =========================================================================
     // AUXILIARY METHODS
     // =========================================================================
