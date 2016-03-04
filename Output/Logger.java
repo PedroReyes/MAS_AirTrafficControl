@@ -5,16 +5,19 @@
  */
 package Output;
 
+import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.SimpleBehaviour;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
  * @author Javier Moreno
  */
-public class Logger extends Agent{
+public class Logger extends Agent {
+
     private FileWriter fichero;
     private PrintWriter pw;
 
@@ -23,33 +26,21 @@ public class Logger extends Agent{
         try {
             fichero = new FileWriter("log.txt");
             pw = new PrintWriter(fichero);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
-        SimpleBehaviour logger = new SimpleBehaviour(this) {
-            boolean finished = false;
-            int state = 0;
+        MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
 
+        addBehaviour(new CyclicBehaviour(this) {
             @Override
             public void action() {
-                ACLMessage msg = receive();
+                ACLMessage msg = myAgent.receive(mAlmacenDInf);
                 if (msg != null) {
-                    pw.println("Recibido nuevo mensaje"+msg.getContent());
+                    pw.println(msg.getContent());
                 } else {
-                    System.out.println("No recibo nada "+state);
-                    //block();
+                    block();
                 }
-                state++;
             }
-
-            @Override
-            public boolean done() {
-                try {
-                    fichero.close();
-                } catch (Exception e2) {}
-                return finished;
-            }
-        };
-
-        addBehaviour(logger);
+        });
     }
 }

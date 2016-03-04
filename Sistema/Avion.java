@@ -9,7 +9,6 @@ import Auxiliar.Vector;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -64,7 +63,7 @@ public class Avion extends Agent {
         msg.setContent("ADD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
         msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
         send(msg);
-        
+
         MessageTemplate mControlTemp = MessageTemplate.MatchSender(new AID("tmp", AID.ISLOCALNAME));
         MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
 
@@ -73,17 +72,17 @@ public class Avion extends Agent {
             public void action() {
                 // Primero se bloquea esperando un mensaje de ControlTemporal
                 boolean mensajeRecibido = false;
-                
+
                 while (!mensajeRecibido) {
                     ACLMessage msg = myAgent.receive(mControlTemp);
                     if (msg != null) {
-                        setTimeStep(Integer.parseInt(msg.getContent())); 
+                        setTimeStep(Integer.parseInt(msg.getContent()));
                         mensajeRecibido = true;
                     } else {
                         block();
                     }
                 }
-                
+
                 // Actualiza su posicion y combustible
                 actualizarPosicion();
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
@@ -93,7 +92,7 @@ public class Avion extends Agent {
 
                 // Espera una correccion de vuelo
                 mensajeRecibido = false;
-                
+
                 while (!mensajeRecibido) {
                     msg = myAgent.receive(mAlmacenDInf);
                     if (msg != null) {
@@ -112,7 +111,16 @@ public class Avion extends Agent {
     // AUXILIARY METHODS
     // =========================================================================
     public void actualizarInformacion(String contenido) {
-
+        String words[] = contenido.split(" ");
+        switch (words[0]) {
+            case "MOD":
+                Vector aux = new Vector(Integer.parseInt(words[1]), Integer.parseInt(words[2]), 0);
+                setVectorDirector(aux);
+                break;
+            case "DEL":
+                this.doDelete();
+                break;
+        }
     }
 
     public void actualizarPosicion() {
