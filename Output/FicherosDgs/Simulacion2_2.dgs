@@ -1,0 +1,24 @@
+DGS004
+'null' 0 0
+st0
+
+an 1_1_0
+cn 1_1_0 x=1 y=1 z=0
+an 1_2_0
+cn 1_2_0 x=1 y=2 z=0
+an 2_1_0
+cn 2_1_0 x=2 y=1 z=0
+an 2_2_0
+cn 2_2_0 x=2 y=2 z=0
+ae 1_1_0_1_2_0_0 1_1_0 1_2_0
+ce 1_1_0_1_2_0_0 ui.class=bordes
+ae 1_1_0_2_1_0_0 1_1_0 2_1_0
+ce 1_1_0_2_1_0_0 ui.class=bordes
+ae 1_1_0_2_2_0_0 1_1_0 2_2_0
+ce 1_1_0_2_2_0_0 ui.class=invisibles
+ae 1_2_0_2_1_0_0 1_2_0 2_1_0
+ce 1_2_0_2_1_0_0 ui.class=invisibles
+ae 1_2_0_2_2_0_0 1_2_0 2_2_0
+ce 1_2_0_2_2_0_0 ui.class=bordes
+ae 2_1_0_2_2_0_0 2_1_0 2_2_0
+ce 2_1_0_2_2_0_0 ui.class=bordes

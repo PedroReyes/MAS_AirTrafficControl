@@ -1,0 +1,174 @@
+DGS004
+'null' 0 0
+st0
+
+an f1c3a0
+cn f1c3a0 x=3 y=6 z=0
+cn f1c3a0 ui.label=f1c3a0
+an f2c3a0
+cn f2c3a0 x=3 y=5 z=0
+cn f2c3a0 ui.label=f2c3a0
+an f3c3a0
+cn f3c3a0 x=3 y=4 z=0
+cn f3c3a0 ui.label=f3c3a0
+an f4c3a0
+cn f4c3a0 x=3 y=3 z=0
+cn f4c3a0 ui.label=f4c3a0
+an f5c3a0
+cn f5c3a0 x=3 y=2 z=0
+cn f5c3a0 ui.label=f5c3a0
+an f6c3a0
+cn f6c3a0 x=3 y=1 z=0
+cn f6c3a0 ui.label=f6c3a0
+an f1c2a0
+cn f1c2a0 x=2 y=6 z=0
+cn f1c2a0 ui.label=f1c2a0
+an f2c2a0
+cn f2c2a0 x=2 y=5 z=0
+cn f2c2a0 ui.label=f2c2a0
+an f3c2a0
+cn f3c2a0 x=2 y=4 z=0
+cn f3c2a0 ui.label=f3c2a0
+an f4c2a0
+cn f4c2a0 x=2 y=3 z=0
+cn f4c2a0 ui.label=f4c2a0
+an f5c2a0
+cn f5c2a0 x=2 y=2 z=0
+cn f5c2a0 ui.label=f5c2a0
+an f6c2a0
+cn f6c2a0 x=2 y=1 z=0
+cn f6c2a0 ui.label=f6c2a0
+an f1c1a0
+cn f1c1a0 x=1 y=6 z=0
+cn f1c1a0 ui.label=f1c1a0
+an f2c1a0
+cn f2c1a0 x=1 y=5 z=0
+cn f2c1a0 ui.label=f2c1a0
+an f3c1a0
+cn f3c1a0 x=1 y=4 z=0
+cn f3c1a0 ui.label=f3c1a0
+an f4c1a0
+cn f4c1a0 x=1 y=3 z=0
+cn f4c1a0 ui.label=f4c1a0
+an f5c1a0
+cn f5c1a0 x=1 y=2 z=0
+cn f5c1a0 ui.label=f5c1a0
+an f6c1a0
+cn f6c1a0 x=1 y=1 z=0
+cn f6c1a0 ui.label=f6c1a0
+ae N1f1c3a0N2f1c2a0 f1c3a0 f1c2a0
+ce N1f1c3a0N2f1c2a0 ui.class=bordes
+ae N1f1c3a0N2f2c2a0 f1c3a0 f2c2a0
+ce N1f1c3a0N2f2c2a0 ui.class=invisibles
+ae N1f1c3a0N2f2c3a0 f1c3a0 f2c3a0
+ce N1f1c3a0N2f2c3a0 ui.class=bordes
+ae N1f2c3a0N2f1c2a0 f2c3a0 f1c2a0
+ce N1f2c3a0N2f1c2a0 ui.class=invisibles
+ae N1f2c3a0N2f2c2a0 f2c3a0 f2c2a0
+ce N1f2c3a0N2f2c2a0 ui.class=invisibles
+ae N1f2c3a0N2f3c2a0 f2c3a0 f3c2a0
+ce N1f2c3a0N2f3c2a0 ui.class=invisibles
+ae N1f2c3a0N2f3c3a0 f2c3a0 f3c3a0
+ce N1f2c3a0N2f3c3a0 ui.class=bordes
+ae N1f3c3a0N2f2c2a0 f3c3a0 f2c2a0
+ce N1f3c3a0N2f2c2a0 ui.class=invisibles
+ae N1f3c3a0N2f3c2a0 f3c3a0 f3c2a0
+ce N1f3c3a0N2f3c2a0 ui.class=invisibles
+ae N1f3c3a0N2f4c2a0 f3c3a0 f4c2a0
+ce N1f3c3a0N2f4c2a0 ui.class=invisibles
+ae N1f3c3a0N2f4c3a0 f3c3a0 f4c3a0
+ce N1f3c3a0N2f4c3a0 ui.class=bordes
+ae N1f4c3a0N2f3c2a0 f4c3a0 f3c2a0
+ce N1f4c3a0N2f3c2a0 ui.class=invisibles
+ae N1f4c3a0N2f4c2a0 f4c3a0 f4c2a0
+ce N1f4c3a0N2f4c2a0 ui.class=invisibles
+ae N1f4c3a0N2f5c2a0 f4c3a0 f5c2a0
+ce N1f4c3a0N2f5c2a0 ui.class=invisibles
+ae N1f4c3a0N2f5c3a0 f4c3a0 f5c3a0
+ce N1f4c3a0N2f5c3a0 ui.class=bordes
+ae N1f5c3a0N2f4c2a0 f5c3a0 f4c2a0
+ce N1f5c3a0N2f4c2a0 ui.class=invisibles
+ae N1f5c3a0N2f5c2a0 f5c3a0 f5c2a0
+ce N1f5c3a0N2f5c2a0 ui.class=invisibles
+ae N1f5c3a0N2f6c2a0 f5c3a0 f6c2a0
+ce N1f5c3a0N2f6c2a0 ui.class=invisibles
+ae N1f5c3a0N2f6c3a0 f5c3a0 f6c3a0
+ce N1f5c3a0N2f6c3a0 ui.class=bordes
+ae N1f6c3a0N2f5c2a0 f6c3a0 f5c2a0
+ce N1f6c3a0N2f5c2a0 ui.class=invisibles
+ae N1f6c3a0N2f6c2a0 f6c3a0 f6c2a0
+ce N1f6c3a0N2f6c2a0 ui.class=bordes
+ae N1f1c2a0N2f1c1a0 f1c2a0 f1c1a0
+ce N1f1c2a0N2f1c1a0 ui.class=bordes
+ae N1f1c2a0N2f2c1a0 f1c2a0 f2c1a0
+ce N1f1c2a0N2f2c1a0 ui.class=invisibles
+ae N1f1c2a0N2f2c2a0 f1c2a0 f2c2a0
+ce N1f1c2a0N2f2c2a0 ui.class=invisibles
+ae N1f2c2a0N2f1c1a0 f2c2a0 f1c1a0
+ce N1f2c2a0N2f1c1a0 ui.class=invisibles
+ae N1f2c2a0N2f2c1a0 f2c2a0 f2c1a0
+ce N1f2c2a0N2f2c1a0 ui.class=invisibles
+ae N1f2c2a0N2f3c1a0 f2c2a0 f3c1a0
+ce N1f2c2a0N2f3c1a0 ui.class=invisibles
+ae N1f2c2a0N2f3c2a0 f2c2a0 f3c2a0
+ce N1f2c2a0N2f3c2a0 ui.class=invisibles
+ae N1f3c2a0N2f2c1a0 f3c2a0 f2c1a0
+ce N1f3c2a0N2f2c1a0 ui.class=invisibles
+ae N1f3c2a0N2f3c1a0 f3c2a0 f3c1a0
+ce N1f3c2a0N2f3c1a0 ui.class=invisibles
+ae N1f3c2a0N2f4c1a0 f3c2a0 f4c1a0
+ce N1f3c2a0N2f4c1a0 ui.class=invisibles
+ae N1f3c2a0N2f4c2a0 f3c2a0 f4c2a0
+ce N1f3c2a0N2f4c2a0 ui.class=invisibles
+ae N1f4c2a0N2f3c1a0 f4c2a0 f3c1a0
+ce N1f4c2a0N2f3c1a0 ui.class=invisibles
+ae N1f4c2a0N2f4c1a0 f4c2a0 f4c1a0
+ce N1f4c2a0N2f4c1a0 ui.class=invisibles
+ae N1f4c2a0N2f5c1a0 f4c2a0 f5c1a0
+ce N1f4c2a0N2f5c1a0 ui.class=invisibles
+ae N1f4c2a0N2f5c2a0 f4c2a0 f5c2a0
+ce N1f4c2a0N2f5c2a0 ui.class=invisibles
+ae N1f5c2a0N2f4c1a0 f5c2a0 f4c1a0
+ce N1f5c2a0N2f4c1a0 ui.class=invisibles
+ae N1f5c2a0N2f5c1a0 f5c2a0 f5c1a0
+ce N1f5c2a0N2f5c1a0 ui.class=invisibles
+ae N1f5c2a0N2f6c1a0 f5c2a0 f6c1a0
+ce N1f5c2a0N2f6c1a0 ui.class=invisibles
+ae N1f5c2a0N2f6c2a0 f5c2a0 f6c2a0
+ce N1f5c2a0N2f6c2a0 ui.class=invisibles
+ae N1f6c2a0N2f5c1a0 f6c2a0 f5c1a0
+ce N1f6c2a0N2f5c1a0 ui.class=invisibles
+ae N1f6c2a0N2f6c1a0 f6c2a0 f6c1a0
+ce N1f6c2a0N2f6c1a0 ui.class=bordes
+ae N1f1c1a0N2f2c1a0 f1c1a0 f2c1a0
+ce N1f1c1a0N2f2c1a0 ui.class=bordes
+ae N1f2c1a0N2f3c1a0 f2c1a0 f3c1a0
+ce N1f2c1a0N2f3c1a0 ui.class=bordes
+ae N1f3c1a0N2f4c1a0 f3c1a0 f4c1a0
+ce N1f3c1a0N2f4c1a0 ui.class=bordes
+ae N1f4c1a0N2f5c1a0 f4c1a0 f5c1a0
+ce N1f4c1a0N2f5c1a0 ui.class=bordes
+ae N1f5c1a0N2f6c1a0 f5c1a0 f6c1a0
+ce N1f5c1a0N2f6c1a0 ui.class=bordes
+st1
+
+cn f1c1a0 ui.class=avion
+st2
+
+cn f1c2a0 ui.class=pista
+st3
+
+cn f1c1a0 ui.class=vacio
+cn f2c2a0 ui.class=avion
+st4
+
+cn f2c2a0 ui.class=vacio
+cn f3c3a0 ui.class=avion
+st5
+
+cn f3c3a0 ui.class=vacio
+cn f2c2a0 ui.class=avion
+st6
+
+cn f2c2a0 ui.class=vacio
+cn f1c1a0 ui.class=avion

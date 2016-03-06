@@ -1,0 +1,62 @@
+graph { fill-color: #555; }
+
+
+edge {
+    shape: line;
+    fill-mode: dyn-plain;
+    fill-color: #222, #555, green, yellow;
+    size: 1px;
+    visibility-mode: normal;
+}
+
+edge.invisibles{
+    visibility-mode: normal;
+}
+
+edge.bordes{
+    shape:line;
+    fill-color: blue;
+    size: 0;
+}
+
+node {
+    size: 5px;
+    fill-color: #777;
+    text-mode: normal;
+    z-index: 0;
+}
+
+node.vacio {
+    size: 5px;
+    fill-color: #777;
+    text-mode: normal;
+    z-index: 0;
+}
+
+node.avion{
+    fill-color: red;
+    size: 50px;
+    fill-mode: image-scaled;
+  fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/AvionN.png');
+}
+
+node.pista{
+    fill-color: blue;
+    size: 20px;
+    fill-mode: image-scaled;
+    fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/airport_runaway.png');
+}
+
+sprite.avion {
+  shape: box;
+  size: 50px, 50px;
+  fill-mode: image-scaled;
+  fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/AvionN.png');
+}
+
+sprite.pista {
+  shape: box;
+  size: 100px, 25px;
+  fill-mode: image-scaled;
+  fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/airport_runaway.png');
+}
