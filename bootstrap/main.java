@@ -41,7 +41,7 @@ public class main {
 				arguments[0] = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Auxiliar/Simulacion.txt";
 			} else {
 				// WINDOWS
-				arguments[0] = "JAVI AQUI VA LA URL A LA SIMULACIÓN EN TU ORDENADOR";
+				arguments[0] = "C:\\Users\\j_sto\\Documents\\GitHub\\MAS_AirTrafficControl\\Auxiliar";
 			}
 			arguments[1] = home;
 
