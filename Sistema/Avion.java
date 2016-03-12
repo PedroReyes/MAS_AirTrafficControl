@@ -9,6 +9,7 @@ import Auxiliar.Vector;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -31,7 +32,7 @@ public class Avion extends Agent {
 
     }
 
-    public Avion(String id, Vector posicion, int comb, double combXStep) {
+    public Avion(String id, Vector posicion, double comb, double combXStep) {
         this.id = id;
         this.posicionActual = posicion;
         this.combustibleActual = comb;
@@ -59,10 +60,15 @@ public class Avion extends Agent {
         setCombustibleXStep((double) args[3]);
         setTimeStep((int) args[4]);
 
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent("ADD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
-        msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
-        send(msg);
+        addBehaviour(new OneShotBehaviour(this) {
+            @Override
+            public void action() {
+                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                msg.setContent(getTimeStep() + " " + "ADD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
+                msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
+                send(msg);
+            }
+        });
 
         MessageTemplate mControlTemp = MessageTemplate.MatchSender(new AID("tmp", AID.ISLOCALNAME));
         MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
@@ -71,37 +77,22 @@ public class Avion extends Agent {
             @Override
             public void action() {
                 // Primero se bloquea esperando un mensaje de ControlTemporal
-                boolean mensajeRecibido = false;
+                ACLMessage msg = myAgent.blockingReceive(mControlTemp);
+                setTimeStep(Integer.parseInt(msg.getContent()));
+                /* By using blockingReceive(), the receiving agent suspends all its activities until a message arrives:
 
-                while (!mensajeRecibido) {
-                    ACLMessage msg = myAgent.receive(mControlTemp);
-                    if (msg != null) {
-                        setTimeStep(Integer.parseInt(msg.getContent()));
-                        mensajeRecibido = true;
-                    } else {
-                        block();
-                    }
-                }
+                ACLMessage msg = blockingReceive(); Optional arguments:
+                
+                pattern object: to select the kinds of message that we want to receive.
+                timeout: if the timeout expires before a desired message arrives, the method returns null.*/
 
                 // Actualiza su posicion y combustible
                 actualizarPosicion();
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.setContent("MOD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
-                msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
-                send(msg);
+                mandarNuevaPosicion();
 
                 // Espera una correccion de vuelo
-                mensajeRecibido = false;
-
-                while (!mensajeRecibido) {
-                    msg = myAgent.receive(mAlmacenDInf);
-                    if (msg != null) {
-                        actualizarInformacion(msg.getContent());
-                        mensajeRecibido = true;
-                    } else {
-                        block();
-                    }
-                }
+                msg = myAgent.blockingReceive(mAlmacenDInf);
+                actualizarInformacion(msg.getContent());
             }
         }
         );
@@ -110,15 +101,17 @@ public class Avion extends Agent {
     // =========================================================================
     // AUXILIARY METHODS
     // =========================================================================
-    public void actualizarInformacion(String contenido) {
-        String words[] = contenido.split(" ");
-        switch (words[0]) {
+    public void actualizarInformacion(String content) {
+        String words[] = content.split(" ");
+        switch (words[1]) {
             case "MOD":
-                Vector aux = new Vector(Integer.parseInt(words[1]), Integer.parseInt(words[2]), 0);
+                Vector aux = new Vector(Integer.parseInt(words[3]), Integer.parseInt(words[4]), 0);
                 setVectorDirector(aux);
                 break;
-            case "DEL":
+            case "REM":
                 this.doDelete();
+                break;
+            default:
                 break;
         }
     }
@@ -130,10 +123,11 @@ public class Avion extends Agent {
         this.combustibleActual = this.combustibleActual - this.combustibleXStep;
     }
 
-    public void mandarNuevaPosicion(String receiver) {
+    public void mandarNuevaPosicion() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent("");
-        msg.addReceiver(new AID(receiver, AID.ISLOCALNAME));
+        msg.setContent(getTimeStep() + " " + "MOD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
+        msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
+        msg.addReplyTo(new AID("atc", AID.ISLOCALNAME));
         send(msg);
     }
 
