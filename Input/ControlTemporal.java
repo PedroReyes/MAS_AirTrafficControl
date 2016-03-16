@@ -84,6 +84,7 @@ public class ControlTemporal extends Agent {
 						});
 					}
 					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
+					// TICK "N"C
 				} else {
 					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
 					// TICK "N"
