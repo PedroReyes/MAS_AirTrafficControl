@@ -37,6 +37,7 @@ public class Avion extends Agent {
         this.posicionActual = posicion;
         this.combustibleActual = comb;
         this.combustibleXStep = combXStep;
+        this.vectorDirector = new Vector(1,-1,0);
     }
 
     public Avion(String id, Vector vector, Vector posicion, double comb, double combXStep, int time) {
@@ -60,18 +61,19 @@ public class Avion extends Agent {
         setCombustibleXStep((double) args[3]);
         setTimeStep((int) args[4]);
 
+        MessageTemplate mControlTemp = MessageTemplate.MatchSender(new AID("tmp", AID.ISLOCALNAME));
+        MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
+
         addBehaviour(new OneShotBehaviour(this) {
             @Override
             public void action() {
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.setContent(getTimeStep() + " " + "ADD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
-                msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
-                send(msg);
+                mandarMensaje("ADD");
+                
+                // Espera una primera direccion de vuelo
+                ACLMessage msg = myAgent.blockingReceive(mAlmacenDInf);
+                actualizarInformacion(msg.getContent());
             }
         });
-
-        MessageTemplate mControlTemp = MessageTemplate.MatchSender(new AID("tmp", AID.ISLOCALNAME));
-        MessageTemplate mAlmacenDInf = MessageTemplate.MatchSender(new AID("adi", AID.ISLOCALNAME));
 
         addBehaviour(new CyclicBehaviour(this) {
             @Override
@@ -79,16 +81,10 @@ public class Avion extends Agent {
                 // Primero se bloquea esperando un mensaje de ControlTemporal
                 ACLMessage msg = myAgent.blockingReceive(mControlTemp);
                 setTimeStep(Integer.parseInt(msg.getContent()));
-                /* By using blockingReceive(), the receiving agent suspends all its activities until a message arrives:
-
-                ACLMessage msg = blockingReceive(); Optional arguments:
                 
-                pattern object: to select the kinds of message that we want to receive.
-                timeout: if the timeout expires before a desired message arrives, the method returns null.*/
-
                 // Actualiza su posicion y combustible
                 actualizarPosicion();
-                mandarNuevaPosicion();
+                mandarMensaje("MOD");
 
                 // Espera una correccion de vuelo
                 msg = myAgent.blockingReceive(mAlmacenDInf);
@@ -102,10 +98,11 @@ public class Avion extends Agent {
     // AUXILIARY METHODS
     // =========================================================================
     public void actualizarInformacion(String content) {
-        String words[] = content.split(" ");
-        switch (words[1]) {
+    	String words[] = content.split(" ");
+        switch (words[0]) {
             case "MOD":
-                Vector aux = new Vector(Integer.parseInt(words[3]), Integer.parseInt(words[4]), 0);
+                String vector[] = words[2].split(",");
+                Vector aux = new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0);
                 setVectorDirector(aux);
                 break;
             case "REM":
@@ -123,12 +120,13 @@ public class Avion extends Agent {
         this.combustibleActual = this.combustibleActual - this.combustibleXStep;
     }
 
-    public void mandarNuevaPosicion() {
+    public void mandarMensaje(String orden) {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(getTimeStep() + " " + "MOD " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
+        msg.setContent(getTimeStep() + " " + orden + " " + getID() + " " + getPosicionActual() + " " + getCombustibleActual() + " " + getCombustibleXStep());
         msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
         msg.addReplyTo(new AID("atc", AID.ISLOCALNAME));
         send(msg);
+        System.out.println("Mando nuevo mensaje " + msg.getContent());
     }
 
     // =========================================================================

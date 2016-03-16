@@ -34,8 +34,9 @@ public class AlmacenDeInformacion extends Agent {
                     System.out.println("Recibido nuevo mensaje " + msg.getContent());
                     actualizarInformacion(msg.getContent());
                     for (Iterator iter = msg.getAllReplyTo(); iter.hasNext();) {
-                        System.out.println(iter.next());
-                        informar((AID) iter.next(), msg.getContent());
+                    	Object obj = iter.next();
+                        System.out.println(obj);
+                        informar((AID) obj, msg.getContent());
                     }
                 } else {
                     System.out.println("No recibo nada");
@@ -52,20 +53,21 @@ public class AlmacenDeInformacion extends Agent {
     // =========================================================================
     public void actualizarInformacion(String content) {
         String words[] = content.split(" ");
-        String vector[] = words[3].split(",");
         switch (words[1]) {
             case "ADD":
-                aviones.put(words[2], new Avion(words[2], new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0), Double.parseDouble(words[4]), Double.parseDouble(words[5])));
+                String vectorADD[] = words[3].split(",");
+                aviones.put(words[2], new Avion(words[2], new Vector(Integer.parseInt(vectorADD[0].substring(9)), Integer.parseInt(vectorADD[1].substring(2)), 0), Double.parseDouble(words[4]), Double.parseDouble(words[5])));
                 break;
             case "REM":
                 aviones.remove(words[2]);
                 break;
             case "MOD":
+                String vectorMOD[] = words[3].split(",");
                 Avion aux = aviones.get(words[2]);
                 if(words.length == 4){ //Mensaje de ATC
-                    aux.setVectorDirector(new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0));
+                    aux.setVectorDirector(new Vector(Integer.parseInt(vectorMOD[0].substring(9)), Integer.parseInt(vectorMOD[1].substring(2)), 0));
                 } else { //Mensaje de Avion
-                    aux.setPosicionActual(new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0));
+                    aux.setPosicionActual(new Vector(Integer.parseInt(vectorMOD[0].substring(9)), Integer.parseInt(vectorMOD[1].substring(2)), 0));
                     aux.setCombustibleActual(Double.parseDouble(words[4]));
                     aux.setCombustibleXStep(Double.parseDouble(words[5]));
                 }

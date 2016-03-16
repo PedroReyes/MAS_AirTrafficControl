@@ -110,7 +110,7 @@ public class ControlTemporal extends Agent {
 
 		for (AMSAgentDescription agent : agents) {
 			String agentID = agent.getName().toString();
-			if (agentID.startsWith(prefix + "atc") || agentID.startsWith(prefix + "avion")) {
+			if (agentID.startsWith(prefix + "atc") || agentID.startsWith(prefix + "av")) {
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				msg.setContent(String.valueOf(timeStep));
 				msg.addReceiver(agent.getName());
