@@ -5,10 +5,12 @@
  */
 package Output;
 
+import jade.core.Agent;
+
 /**
  *
  * @author pedro
  */
-public class InterfazGrafica {
+public class InterfazGrafica extends Agent {
 
 }
