@@ -1,1 +1,3 @@
-1 ADD av1 Vector{x=1,y=1,z=null} 1000.0 5.01 ADD av0 Vector{x=1,y=1,z=null} 1000.0 5.0
+1 ADD av0 Vector{x=1,y=1,z=null} 1000.0 5.0
+1 ADD av1 Vector{x=1,y=1,z=null} 1000.0 5.0
+10 ADD av2 Vector{x=1,y=1,z=null} 1000.0 5.0

@@ -35,7 +35,7 @@ public class Logger extends Agent {
 			public void action() {
 				ACLMessage msg = myAgent.receive(mAlmacenDInf);
 				if (msg != null) {
-					info = info + msg.getContent();
+					info = info + msg.getContent() + "\n";
 					try {
 						Files.write(Paths.get(Logger.path), info.getBytes());
 					} catch (IOException e) {

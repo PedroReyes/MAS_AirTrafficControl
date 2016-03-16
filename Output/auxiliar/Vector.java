@@ -21,6 +21,14 @@ public class Vector {
 		this.z = z;
 	}
 
+	static public Vector sum(Vector v1, Vector v2) {
+		Integer newX = v1.x != null && v2.x != null ? v1.x + v2.x : null;
+		Integer newY = v1.y != null && v2.y != null ? v1.y + v2.y : null;
+		Integer newZ = v1.z != null && v2.z != null ? v1.z + v2.z : null;
+
+		return new Vector(newX, newY, newZ);
+	}
+
 	// =========================================================================
 	// Equals
 	// =========================================================================
