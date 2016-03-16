@@ -129,6 +129,11 @@ public class ATC extends Agent {
 					List<Vector> vectoresDirectoresRestringidos = new LinkedList<Vector>();
 					List<Vector> posiblesVectoresDirectores = obtenerPosiblesVectoresDirectores();
 
+					// Posicion siguiente en la que se encontraría el avion si
+					// siguiera la ruta fijada
+					Vector avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
+							avionModificado.getVectorDirector());
+
 					// Vemos las colisiones con los otros aviones
 					for (String key : aviones.keySet()) {
 						// Compruebo posibles colisiones del avion con otros
@@ -139,8 +144,6 @@ public class ATC extends Agent {
 
 							// Me hago con la posicion siguiente
 							Vector avionPosSiguiente = Vector.sum(avion.getPosicionActual(), avion.getVectorDirector());
-							Vector avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
-									avionModificado.getVectorDirector());
 
 							//
 							if (entranEnAreaDeRiesgoDeColision(avionPosSiguiente, avionModificadoPosSiguiente)) {
@@ -176,6 +179,35 @@ public class ATC extends Agent {
 					// ===============================
 					// ALGORITMO 3: LIMITES DEL MAPA
 					// ===============================
+					Vector mapaDimensiones = getDimensionesDelMapa();
+					avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
+							avionModificado.getVectorDirector());
+					if (avionModificadoPosSiguiente.x < 1) {
+						// aqui ya sabemos que tendríamos que ir a la derecha
+						if (avionModificadoPosSiguiente.y < 1) {
+							// tenemos que ir hacia abajo
+							vectorDirectorFinal = new Vector(+1, +1, 0);
+
+						} else if (avionModificadoPosSiguiente.y > mapaDimensiones.getY()) {
+							// tenemos que ir hacia arriba
+							vectorDirectorFinal = new Vector(+1, -1, 0);
+						} else {
+							// vamos a la derecha
+							vectorDirectorFinal = new Vector(+1, 0, 0);
+						}
+					} else if (avionModificadoPosSiguiente.x > mapaDimensiones.getX()) {
+						// aqui ya sabemos que tendríamos que ir a la izquierda
+						if (avionModificadoPosSiguiente.y < 1) {
+							// tenemos que ir hacia abajo
+							vectorDirectorFinal = new Vector(-1, +1, 0);
+						} else if (avionModificadoPosSiguiente.y > mapaDimensiones.getY()) {
+							// tenemos que ir hacia arriba
+							vectorDirectorFinal = new Vector(-1, -1, 0);
+						} else {
+							// vamos a la izquierda
+							vectorDirectorFinal = new Vector(-1, 0, 0);
+						}
+					}
 
 					// ===============================
 					// Envio la informacion al Almacen
