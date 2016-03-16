@@ -2,6 +2,8 @@ package Output.auxiliar;
 
 import java.io.IOException;
 
+import Auxiliar.Vector;
+
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException, IOException {

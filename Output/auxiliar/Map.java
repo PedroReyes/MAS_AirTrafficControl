@@ -17,6 +17,8 @@ import org.graphstream.stream.file.FileSourceFactory;
 import org.graphstream.ui.spriteManager.Sprite;
 import org.graphstream.ui.spriteManager.SpriteManager;
 
+import Auxiliar.Vector;
+
 public class Map {
 
 	// Constantes
