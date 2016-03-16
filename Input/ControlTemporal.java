@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import Auxiliar.Escenario;
+import Auxiliar.Vector;
 import Sistema.Avion;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
@@ -45,8 +46,9 @@ public class ControlTemporal extends Agent {
 				// Crear todos los agentes necesarios
 				try {
 					// Crear ATC
-					Object[] args = new Object[1];
+					Object[] args = new Object[2];
 					args[0] = getEscenario().getPistas();
+					args[1] = new Vector(getEscenario().getNumeroColumnasAeropuerto(),getEscenario().getNumeroFilasAeropuerto(),0);
 					
 					AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), args);
 					a.start();

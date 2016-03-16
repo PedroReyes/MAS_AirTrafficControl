@@ -23,7 +23,7 @@ public class Logger extends Agent {
 	static String info = "";
 	static String path = System.getProperty("os.name").equalsIgnoreCase("Mac OS X")
 			? "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Output/log.txt"
-			: "javi";
+			: "C:\\Users\\j_sto\\OneDrive\\Documentos\\EclipseWorkspace\\MAS_AirTrafficControl\\log.txt";
 
 	@Override
 	public void setup() {
