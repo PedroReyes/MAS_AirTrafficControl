@@ -119,7 +119,7 @@ public class Escenario {
 
                         if (newLineAvion[0].contains(formatAvionSeparator)) {
                             Vector posicionActual = new Vector(Integer.valueOf(newLineAvion[1]), Integer.valueOf(newLineAvion[2]), null);
-                            int combustibleActual = Integer.valueOf(newLineAvion[3]);
+                            double combustibleActual = Double.valueOf(newLineAvion[3]);
                             double combustibleGastadoPorSteptime = Double.valueOf(newLineAvion[4]);
 
                             // Añadimos el avion

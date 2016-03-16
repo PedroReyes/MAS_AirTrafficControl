@@ -83,11 +83,6 @@ public class ControlTemporal extends Agent {
 							inicializacionAgentes(avion);
 						});
 					}
-					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
-					// TICK "N"C
-				} else {
-					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
-					// TICK "N"
 				}
 
 				// Mando nuevo timeStep
