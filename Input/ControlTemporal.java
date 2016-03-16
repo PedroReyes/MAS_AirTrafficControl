@@ -5,6 +5,9 @@
  */
 package Input;
 
+import java.util.List;
+import java.util.Map;
+
 import Auxiliar.Escenario;
 import Sistema.Avion;
 import jade.core.Agent;
@@ -17,153 +20,157 @@ import jade.lang.acl.ACLMessage;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Javier Moreno
  */
 public class ControlTemporal extends Agent {
 
-    private int timeStep;
-    private Escenario escenario;
-    private ContainerController home;
+	private int timeStep;
+	private Escenario escenario;
+	private ContainerController home;
 
-    // =========================================================================
-    // AGENT
-    // =========================================================================
-    @Override
-    protected void setup() {
-        Object[] args = getArguments();
-        setEscenario((Escenario) args[0]);
-        setContainer((ContainerController) args[1]);
+	// =========================================================================
+	// AGENT
+	// =========================================================================
+	@Override
+	protected void setup() {
+		Object[] args = getArguments();
+		setEscenario((Escenario) args[0]);
+		setContainer((ContainerController) args[1]);
 
-        addBehaviour(new OneShotBehaviour() {
-            @Override
-            public void action() {
-                // Crear todos los agentes necesarios
-                try {
-                    // Crear ATC
-                    AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), new Object[0]);
-                    a.start();
+		addBehaviour(new OneShotBehaviour() {
+			@Override
+			public void action() {
+				// Crear todos los agentes necesarios
+				try {
+					// Crear ATC
+					AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), new Object[0]);
+					a.start();
 
-                    // Crear AlmacenDeInformacion
-                    a = home.createNewAgent("adi", Sistema.AlmacenDeInformacion.class.getName(), new Object[0]);
-                    a.start();
+					// Crear AlmacenDeInformacion
+					a = home.createNewAgent("adi", Sistema.AlmacenDeInformacion.class.getName(), new Object[0]);
+					a.start();
 
-                    // Crear InterfazGrafica
-                    a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), new Object[0]);
-                    a.start();
+					// Crear InterfazGrafica
+					a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), new Object[0]);
+					a.start();
 
-                    // Crear Logger
-                    a = home.createNewAgent("log", Output.Logger.class.getName(), new Object[0]);
-                    a.start();
-                } catch (StaleProxyException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+					// Crear Logger
+					a = home.createNewAgent("log", Output.Logger.class.getName(), new Object[0]);
+					a.start();
+				} catch (StaleProxyException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
-        TickerBehaviour controlTemp;
-        controlTemp = new TickerBehaviour(this, 1000) {
-            @Override
-            protected void onTick() {
-                timeStep = getTickCount();
+		TickerBehaviour controlTemp;
+		controlTemp = new TickerBehaviour(this, 1000) {
+			@Override
+			protected void onTick() {
+				timeStep = getTickCount();
 
-                // Miro en el escenario si tengo que generar nuevos aviones en este tick
-                Map<Integer, List<Avion>> simulacion = escenario.getEntradaSimuladaAviones();
-                List<Avion> aviones = simulacion.get(timeStep);
+				// Miro en el escenario si tengo que generar nuevos aviones en
+				// este tick
+				Map<Integer, List<Avion>> simulacion = escenario.getEntradaSimuladaAviones();
+				List<Avion> aviones = simulacion.get(timeStep);
 
-                // Si la lista no es vacia, inicializo los aviones
-                if (!aviones.isEmpty()) {
-                    aviones.stream().forEach((avion) -> {
-                        inicializacionAgentes(avion);
-                    });
-                }
+				// Si la lista no es vacia, inicializo los aviones
+				if (aviones != null) {
+					if (!aviones.isEmpty()) {
+						aviones.stream().forEach((avion) -> {
+							inicializacionAgentes(avion);
+						});
+					}
+					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
+				} else {
+					// LANZA UNA LLAMADA COMUNICANDO A TODOS QUE ESTAMOS EN EL
+					// TICK "N"
+				}
 
-                //Mando nuevo timeStep
-                System.out.println("Agent " + myAgent.getLocalName() + ": tick=" + timeStep);
-                mandarMensajes();
-            }
-        };
+				// Mando nuevo timeStep
+				System.out.println("Agent " + myAgent.getLocalName() + ": tick=" + timeStep);
+				mandarMensajes();
+			}
+		};
 
-        addBehaviour(controlTemp);
-    }
+		addBehaviour(controlTemp);
+	}
 
-    // =========================================================================
-    // AUXILIARY METHODS
-    // =========================================================================
-    public void mandarMensajes() {
-        String prefix = "( agent-identifier :name ";
-        AMSAgentDescription[] agents = null;
-        
-        try {
-            SearchConstraints c = new SearchConstraints();
-            c.setMaxResults(new Long(-1));
-            agents = AMSService.search(this, new AMSAgentDescription(), c);
-        } catch (Exception e) {
-        }
+	// =========================================================================
+	// AUXILIARY METHODS
+	// =========================================================================
+	public void mandarMensajes() {
+		String prefix = "( agent-identifier :name ";
+		AMSAgentDescription[] agents = null;
 
-        for (AMSAgentDescription agent : agents) {
-            String agentID = agent.getName().toString();
-            if(agentID.startsWith(prefix+"atc") || agentID.startsWith(prefix+"avion")){
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.setContent(String.valueOf(timeStep));
-                msg.addReceiver(agent.getName());
-                send(msg);
-            }
-        }
-    }
+		try {
+			SearchConstraints c = new SearchConstraints();
+			c.setMaxResults(new Long(-1));
+			agents = AMSService.search(this, new AMSAgentDescription(), c);
+		} catch (Exception e) {
+		}
 
-    public void inicializacionAgentes(Avion agente) {
-        Object[] args = new Object[5];
-        args[0] = agente.getID();
-        args[1] = agente.getPosicionActual();
-        args[2] = agente.getCombustibleActual();
-        args[3] = agente.getCombustibleXStep();
-        args[4] = timeStep;
+		for (AMSAgentDescription agent : agents) {
+			String agentID = agent.getName().toString();
+			if (agentID.startsWith(prefix + "atc") || agentID.startsWith(prefix + "avion")) {
+				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+				msg.setContent(String.valueOf(timeStep));
+				msg.addReceiver(agent.getName());
+				send(msg);
+			}
+		}
+	}
 
-        try {
-            AgentController a = home.createNewAgent(args[0].toString(), Avion.class.getName(), args);
-            a.start();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        }
-    }
+	public void inicializacionAgentes(Avion agente) {
+		Object[] args = new Object[5];
+		args[0] = agente.getID();
+		args[1] = agente.getPosicionActual();
+		args[2] = agente.getCombustibleActual();
+		args[3] = agente.getCombustibleXStep();
+		args[4] = timeStep;
 
-    // =========================================================================
-    // ToString
-    // =========================================================================
-    @Override
-    public String toString() {
-        return "ControlTemporal: [" + getEscenario()
-                + "," + getTimeStep() + "]\n";
-    }
+		try {
+			AgentController a = home.createNewAgent(args[0].toString(), Avion.class.getName(), args);
+			a.start();
+		} catch (StaleProxyException e) {
+			e.printStackTrace();
+		}
+	}
 
-    // =========================================================================
-    // GETTERS & SETTERS
-    // =========================================================================
-    public void setTimeStep(int time) {
-        this.timeStep = time;
-    }
+	// =========================================================================
+	// ToString
+	// =========================================================================
+	@Override
+	public String toString() {
+		return "ControlTemporal: [" + getEscenario() + "," + getTimeStep() + "]\n";
+	}
 
-    public int getTimeStep() {
-        return this.timeStep;
-    }
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
+	public void setTimeStep(int time) {
+		this.timeStep = time;
+	}
 
-    public void setEscenario(Escenario escenario) {
-        this.escenario = escenario;
-    }
+	public int getTimeStep() {
+		return this.timeStep;
+	}
 
-    public Escenario getEscenario() {
-        return this.escenario;
-    }
+	public void setEscenario(Escenario escenario) {
+		this.escenario = escenario;
+	}
 
-    public void setContainer(ContainerController cc) {
-        this.home = cc;
-    }
+	public Escenario getEscenario() {
+		return this.escenario;
+	}
 
-    public ContainerController getContainer() {
-        return this.home;
-    }
+	public void setContainer(ContainerController cc) {
+		this.home = cc;
+	}
+
+	public ContainerController getContainer() {
+		return this.home;
+	}
 }
