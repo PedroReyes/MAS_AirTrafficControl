@@ -25,7 +25,7 @@ public class Main {
 		// Ejecutar main normal
 		// =======================
 		// para ejecutar una simulación primero se ha debido correr el programa
-		boolean ejecutarSimulacion = true;
+		boolean ejecutarSimulacion = false;
 		long speedness = 1000;
 		if (!ejecutarSimulacion) {
 			// Creamos el mapa

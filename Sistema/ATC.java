@@ -5,10 +5,17 @@
  */
 package Sistema;
 
+import jade.core.Agent;
+
 /**
  *
  * @author pedro
  */
-public class ATC {
+public class ATC extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }
