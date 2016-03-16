@@ -56,7 +56,7 @@ public class Avion extends Agent {
         Object[] args = getArguments();
         setID((String) args[0]);
         setPosicionActual((Vector) args[1]);
-        setCombustibleActual((int) args[2]);
+        setCombustibleActual((double) args[2]);
         setCombustibleXStep((double) args[3]);
         setTimeStep((int) args[4]);
 

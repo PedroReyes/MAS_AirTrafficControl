@@ -25,12 +25,13 @@ public class AlmacenDeInformacion extends Agent {
     // =========================================================================
     @Override
     public void setup() {
+    	aviones = new HashMap<String, Avion>();
         CyclicBehaviour almInformacion = new CyclicBehaviour(this) {
             @Override
             public void action() {
                 ACLMessage msg = receive();
                 if (msg != null) {
-                    System.out.println("Recibido nuevo mensaje" + msg.getContent());
+                    System.out.println("Recibido nuevo mensaje " + msg.getContent());
                     actualizarInformacion(msg.getContent());
                     for (Iterator iter = msg.getAllReplyTo(); iter.hasNext();) {
                         System.out.println(iter.next());
@@ -51,9 +52,10 @@ public class AlmacenDeInformacion extends Agent {
     // =========================================================================
     public void actualizarInformacion(String content) {
         String words[] = content.split(" ");
+        String vector[] = words[3].split(",");
         switch (words[1]) {
             case "ADD":
-                aviones.put(words[2], new Avion(words[2], new Vector(Integer.parseInt(words[3]), Integer.parseInt(words[4]), 0), Double.parseDouble(words[5]), Double.parseDouble(words[6])));
+                aviones.put(words[2], new Avion(words[2], new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0), Double.parseDouble(words[4]), Double.parseDouble(words[5])));
                 break;
             case "REM":
                 aviones.remove(words[2]);
@@ -61,11 +63,11 @@ public class AlmacenDeInformacion extends Agent {
             case "MOD":
                 Avion aux = aviones.get(words[2]);
                 if(words.length == 4){ //Mensaje de ATC
-                    aux.setVectorDirector(new Vector(Integer.parseInt(words[3]), Integer.parseInt(words[4]), 0));
+                    aux.setVectorDirector(new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0));
                 } else { //Mensaje de Avion
-                    aux.setPosicionActual(new Vector(Integer.parseInt(words[3]), Integer.parseInt(words[4]), 0));
-                    aux.setCombustibleActual(Double.parseDouble(words[5]));
-                    aux.setCombustibleXStep(Double.parseDouble(words[6]));
+                    aux.setPosicionActual(new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0));
+                    aux.setCombustibleActual(Double.parseDouble(words[4]));
+                    aux.setCombustibleXStep(Double.parseDouble(words[5]));
                 }
                 aviones.replace(words[2], aux);
                 break;
