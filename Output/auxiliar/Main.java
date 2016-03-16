@@ -16,9 +16,19 @@ public class Main {
 
 		// Se indica el fichero donde se salvará la simulación así como el
 		// estilo de la ejecución
-		String dgsFilePath = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Output/FicherosDgs/";
+		String dgsFilePath = "";
+		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+			dgsFilePath = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Output/FicherosDgs/";
+		} else {
+			dgsFilePath = "javi";
+		}
 		String nameDgsFile = "Simulacion" + nRow + "_" + nCol;
-		String stylesheetFilePath = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Output/Stylesheets/";
+		String stylesheetFilePath = "";
+		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+			stylesheetFilePath = "/Users/pedro/Dropbox/Vida_laboral/Master/ProgramacionSistemasMultiagentes/TrabajoSegundaParte/MAS_AirTrafficControl/Output/Stylesheets/";
+		} else {
+			stylesheetFilePath = "javi";
+		}
 		String initialStylesheetName = "initialStylesheet.css";
 
 		// =======================
