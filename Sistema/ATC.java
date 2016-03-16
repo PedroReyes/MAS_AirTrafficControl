@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import Auxiliar.Pista;
 import Auxiliar.Vector;
 import jade.core.AID;
 import jade.core.Agent;
@@ -22,6 +23,7 @@ import jade.lang.acl.ACLMessage;
 public class ATC extends Agent {
 
 	private HashMap<String, Avion> aviones;
+	private List<Pista> pistas;
 
 	/**
 	 * 
@@ -37,8 +39,12 @@ public class ATC extends Agent {
 	// =========================================================================
 	// AGENT
 	// =========================================================================
+	@SuppressWarnings("unchecked")
 	@Override
 	public void setup() {
+		Object[] args = getArguments();
+        setPistas((List<Pista>) args[0]);
+		
 		// Inicializamos aviones, los aviones que se añaden iran viniendo
 		// de AlmacenDeInformacion
 		aviones = new HashMap<String, Avion>();
@@ -196,4 +202,22 @@ public class ATC extends Agent {
 		send(msg);
 	}
 
+	// =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
+    public void setAviones(HashMap<String, Avion> avion) {
+        this.aviones = avion;
+    }
+
+    public HashMap<String, Avion> getAviones() {
+        return this.aviones;
+    }
+    
+    public void setPistas(List<Pista> pista) {
+        this.pistas = pista;
+    }
+
+    public List<Pista> getPistas() {
+        return this.pistas;
+    }
 }

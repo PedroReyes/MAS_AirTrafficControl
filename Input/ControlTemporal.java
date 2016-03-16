@@ -45,7 +45,10 @@ public class ControlTemporal extends Agent {
 				// Crear todos los agentes necesarios
 				try {
 					// Crear ATC
-					AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), new Object[0]);
+					Object[] args = new Object[1];
+					args[0] = getEscenario().getPistas();
+					
+					AgentController a = home.createNewAgent("atc", Sistema.ATC.class.getName(), args);
 					a.start();
 
 					// Crear AlmacenDeInformacion
@@ -53,7 +56,10 @@ public class ControlTemporal extends Agent {
 					a.start();
 
 					// Crear InterfazGrafica
-					a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), new Object[0]);
+					args = new Object[1];
+					args[0] = getEscenario().getPistas();
+					
+					a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), args);
 					a.start();
 
 					// Crear Logger
