@@ -59,7 +59,7 @@ public class ControlTemporal extends Agent {
 
 					// Crear InterfazGrafica
 					args = new Object[1];
-					args[0] = getEscenario().getPistas();
+					args[0] = getEscenario();
 					
 					a = home.createNewAgent("gph", Output.InterfazGrafica.class.getName(), args);
 					a.start();
