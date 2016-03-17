@@ -36,6 +36,8 @@ public class InterfazGrafica extends Agent {
 
 		int nRow = getEscenario().getNumeroFilasAeropuerto();
 		int nCol = getEscenario().getNumeroColumnasAeropuerto();
+		
+		aviones = new HashMap<String, Avion>();
 
 		String dgsFilePath = "";
 		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
@@ -69,7 +71,6 @@ public class InterfazGrafica extends Agent {
 			public void action() {
 				ACLMessage msg = receive();
 				if (msg != null) {
-					System.out.println("Recibido nuevo mensaje " + msg.getContent());
 					actualizarInformacion(msg.getContent());
 				} else {
 					block();

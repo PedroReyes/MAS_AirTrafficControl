@@ -62,7 +62,13 @@ public class Map {
 		this.initialStylesheetName = initialStylesheetName;
 
 		// Creamos el directorio dodne se almacenan los estilos
-		(new File(stylesheetPath.substring(0, stylesheetPath.lastIndexOf('/')))).mkdirs();
+		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+			// Mac OS X
+			(new File(stylesheetPath.substring(0, stylesheetPath.lastIndexOf('/')))).mkdirs();
+		} else {
+			// WINDOWS
+			(new File(stylesheetPath.substring(0, stylesheetPath.lastIndexOf('\\')))).mkdirs();
+		}
 	}
 
 	/**
@@ -215,7 +221,13 @@ public class Map {
 		try {
 			// Se crea el fichero, fuente de los eventos que se producen en el
 			// mapa
-			(new File(dgsFilePath.substring(0, dgsFilePath.lastIndexOf('/')))).mkdirs();
+			if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+				// Mac OS X
+				(new File(dgsFilePath.substring(0, dgsFilePath.lastIndexOf('/')))).mkdirs();
+			} else {
+				// WINDOWS
+				(new File(dgsFilePath.substring(0, dgsFilePath.lastIndexOf('\\')))).mkdirs();
+			}
 			File file = new File(dgsFilePath);
 
 			if (file.createNewFile()) {

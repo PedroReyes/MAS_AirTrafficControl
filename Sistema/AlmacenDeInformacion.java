@@ -81,7 +81,7 @@ public class AlmacenDeInformacion extends Agent {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent(content);
         msg.addReceiver(agent);
-        //msg.addReceiver(new AID("gph", AID.ISLOCALNAME));
+        msg.addReceiver(new AID("gph", AID.ISLOCALNAME));
         msg.addReceiver(new AID("log", AID.ISLOCALNAME));
         send(msg);
     }
