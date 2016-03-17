@@ -94,7 +94,9 @@ public class ControlTemporal extends Agent {
 				}
 
 				// Mando nuevo timeStep
+				System.out.println("----------------------------------------------------------");
 				System.out.println("Agent " + myAgent.getLocalName() + ": tick=" + timeStep);
+				System.out.println("----------------------------------------------------------");
 				mandarMensajes();
 			}
 		};

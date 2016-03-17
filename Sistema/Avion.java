@@ -98,10 +98,11 @@ public class Avion extends Agent {
     // AUXILIARY METHODS
     // =========================================================================
     public void actualizarInformacion(String content) {
+        System.out.println("AVN: Recibe: " + content);
     	String words[] = content.split(" ");
-        switch (words[0]) {
+        switch (words[1]) {
             case "MOD":
-                String vector[] = words[2].split(",");
+                String vector[] = words[3].split(",");
                 Vector aux = new Vector(Integer.parseInt(vector[0].substring(9)), Integer.parseInt(vector[1].substring(2)), 0);
                 setVectorDirector(aux);
                 break;
@@ -126,7 +127,6 @@ public class Avion extends Agent {
         msg.addReceiver(new AID("adi", AID.ISLOCALNAME));
         msg.addReplyTo(new AID("atc", AID.ISLOCALNAME));
         send(msg);
-        System.out.println("Mando nuevo mensaje " + msg.getContent());
     }
 
     // =========================================================================

@@ -67,7 +67,7 @@ public class ATC extends Agent {
 				String idAvion = "";
 
 				// Actualizo el estado de los aviones
-				System.out.println("Recibido nuevo mensaje " + msg.getContent());
+				System.out.println("ATC: Recibe: " + msg.getContent());
 				idAvion = actualizarInformacion(msg.getContent());
 
 				// Avion el cual estamos tratando actualmente y que sera

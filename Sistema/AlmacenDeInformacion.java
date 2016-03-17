@@ -31,15 +31,14 @@ public class AlmacenDeInformacion extends Agent {
             public void action() {
                 ACLMessage msg = receive();
                 if (msg != null) {
-                    System.out.println("Recibido nuevo mensaje " + msg.getContent());
+                    //System.out.println("ADI: Recibe: " + msg.getContent());
                     actualizarInformacion(msg.getContent());
                     for (Iterator iter = msg.getAllReplyTo(); iter.hasNext();) {
                     	Object obj = iter.next();
-                        System.out.println(obj);
+                        //System.out.println(obj);
                         informar((AID) obj, msg.getContent());
                     }
                 } else {
-                    System.out.println("No recibo nada");
                     block();
                 }
             }
@@ -82,7 +81,7 @@ public class AlmacenDeInformacion extends Agent {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent(content);
         msg.addReceiver(agent);
-        msg.addReceiver(new AID("gph", AID.ISLOCALNAME));
+        //msg.addReceiver(new AID("gph", AID.ISLOCALNAME));
         msg.addReceiver(new AID("log", AID.ISLOCALNAME));
         send(msg);
     }
