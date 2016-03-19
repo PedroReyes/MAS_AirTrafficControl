@@ -67,7 +67,7 @@ public class ATC extends Agent {
 				String idAvion = "";
 
 				// Actualizo el estado de los aviones
-				System.out.println("ATC: Recibe: " + msg.getContent());
+				// System.out.println("ATC: Recibe: " + msg.getContent());
 				idAvion = actualizarInformacion(msg.getContent());
 
 				// Avion el cual estamos tratando actualmente y que sera
@@ -80,6 +80,7 @@ public class ATC extends Agent {
 
 				// Vector director final del avion
 				Vector vectorDirectorFinal = avionModificado.getVectorDirector();
+				System.out.println("Vector inicial del avion: " + vectorDirectorFinal);
 
 				// ===============================
 				// ALGORITMO 1: ESTABLECIENDO RUTA PARA ATERRIZAR
@@ -101,6 +102,7 @@ public class ATC extends Agent {
 				Vector entrada = new Vector(mejorPista.getEntradaX(), mejorPista.getEntradaX(),
 						mejorPista.getCoordenadaX());
 				vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(), entrada);
+				System.out.println("Al dirigirse a la entrada: " + vectorDirectorFinal);
 
 				// Si su posicion actual es el punto de entrada, le indicamos
 				// qeu su vector director es hacia la pista
@@ -110,6 +112,7 @@ public class ATC extends Agent {
 					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(),
 							posMejorPista);
 				}
+				System.out.println("Vector pista del avion: " + vectorDirectorFinal);
 
 				// Si su posicion actual es la pista de aterrizaje, lo
 				// eliminamos del mapa
@@ -156,8 +159,7 @@ public class ATC extends Agent {
 								for (Vector posibleVector : posiblesVectoresDirectores) {
 									if (!vectoresDirectoresRestringidos.contains(posibleVector)) {
 										// Consigo la nueva posicion usando el
-										// nuevo
-										// vector director
+										// nuevo vector director
 										avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
 												avionModificado.getVectorDirector());
 
@@ -170,6 +172,8 @@ public class ATC extends Agent {
 										}
 									}
 								}
+
+								System.out.println("Vector evitar colision del avion: " + vectorDirectorFinal);
 							} else {
 								// Siga su rumbo, cambio y corto
 							}
@@ -179,14 +183,20 @@ public class ATC extends Agent {
 					// ===============================
 					// ALGORITMO 3: LIMITES DEL MAPA
 					// ===============================
-					Vector mapaDimensiones = getDimensionesDelMapa();
-					vectorDirectorFinal = new Vector(
-							avionModificadoPosSiguiente.x < 1 ? +1
-									: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1 : 0),
-							avionModificadoPosSiguiente.y < 1 ? +1
-									: (avionModificadoPosSiguiente.y > mapaDimensiones.getY() ? -1 : 0),
-							0);
+					if (true) {
+						Vector mapaDimensiones = getDimensionesDelMapa();
+						vectorDirectorFinal = new Vector(
+								avionModificadoPosSiguiente.x < 1 ? +1
+										: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1
+												: avionModificado.getVectorDirector().x),
+								avionModificadoPosSiguiente.y < 1 ? +1
+										: (avionModificadoPosSiguiente.y > mapaDimensiones.getY() ? -1
+												: avionModificado.getVectorDirector().y),
+								0);
 
+						System.out.println("Vector limites del avion: " + vectorDirectorFinal);
+
+					}
 					// ===============================
 					// Envio la informacion al Almacen
 					// ===============================

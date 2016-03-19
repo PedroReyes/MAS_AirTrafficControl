@@ -61,7 +61,7 @@ public class InterfazGrafica extends Agent {
 
 			int pistaN = 0;
 			for (Pista pista : getEscenario().getPistas()) {
-				map.addNewObjectTo(1, "Pista" + pistaN, pista.getCoordenadaX(), pista.getCoordenadaY(), 0, "pista");
+				map.addNewObjectTo(1, "Pista" + pistaN, pista.getCoordenadaY(), pista.getCoordenadaX(), 0, "pista");
 				pistaN++;
 			}
 		} catch (IOException e) {
@@ -88,7 +88,7 @@ public class InterfazGrafica extends Agent {
 	// AUXILIARY METHODS
 	// =========================================================================
 	public void actualizarInformacion(String content) {
-		System.out.println("MENSAJE: " + content);
+		// System.out.println("MENSAJE: " + content);
 		if (true) {
 			String words[] = content.split(" ");
 			int step = Integer.valueOf(words[0]);
@@ -98,8 +98,8 @@ public class InterfazGrafica extends Agent {
 				String vectorADD[] = words[3].split(",");
 				map.addNewObjectTo(Integer.parseInt(words[0]), words[2], Integer.parseInt(vectorADD[0].substring(9)),
 						Integer.parseInt(vectorADD[1].substring(2)), 0, "avion");
-				aviones.put(words[2],
-						new Avion(words[2],
+				aviones.put(objectId,
+						new Avion(objectId,
 								new Vector(Integer.parseInt(vectorADD[0].substring(9)),
 										Integer.parseInt(vectorADD[1].substring(2)), 0),
 								Double.parseDouble(words[4]), Double.parseDouble(words[5])));

@@ -23,7 +23,7 @@ public class Vector {
 
 	public static double distance(Vector entrada, Vector entrada2) {
 		// TODO Auto-generated method stub
-		return 0;
+		return Math.abs(entrada2.x - entrada.x) + Math.abs(entrada2.y - entrada.y) + Math.abs(entrada2.z - entrada.z);
 	}
 
 	static public Vector sum(Vector v1, Vector v2) {
