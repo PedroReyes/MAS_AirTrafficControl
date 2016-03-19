@@ -96,19 +96,24 @@ public class ATC extends Agent {
 						mejorPista = pista;
 					}
 				}
+				System.out.println("MEJOR PISTA: " + mejorPista);
 
 				// Establecemos que su vector director final es el punto de
 				// entrada de la pista mas cercana
-				Vector entrada = new Vector(mejorPista.getEntradaX(), mejorPista.getEntradaX(),
-						mejorPista.getCoordenadaX());
-				vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(), entrada);
-				System.out.println("Al dirigirse a la entrada: " + vectorDirectorFinal);
+				if (false) {
+					Vector entrada = new Vector(mejorPista.getEntradaX(), mejorPista.getEntradaX(),
+							mejorPista.getCoordenadaX());
+					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(), entrada);
+					System.out.println("Al dirigirse a la entrada: " + vectorDirectorFinal);
+				}
 
 				// Si su posicion actual es el punto de entrada, le indicamos
 				// qeu su vector director es hacia la pista
 				Vector posMejorPista = new Vector(mejorPista.getCoordenadaX(), mejorPista.getCoordenadaY(),
 						mejorPista.getCoordenadaX());
-				if (avionModificado.getPosicionActual().equals(entrada)) {
+				System.out.println("Vector pista del avion: " + vectorDirectorFinal);
+				if (!avionModificado.getPosicionActual().equals(posMejorPista)) {
+					System.out.println("MODIFICADO VECTOR DIRECTOR...");
 					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(),
 							posMejorPista);
 				}
@@ -125,93 +130,99 @@ public class ATC extends Agent {
 				// ===============================
 				// ALGORITMO 2: EVITAR COLISIONES
 				// ===============================
-				String content = "av (id del avion) empty order";
-				content = "MOD/REM (id del avion) (VECTOR DIRECTOR)";
-				if (!eliminarAvion) {
-					// Vectores directores a los que no podemos dirigirnos
-					List<Vector> vectoresDirectoresRestringidos = new LinkedList<Vector>();
-					List<Vector> posiblesVectoresDirectores = obtenerPosiblesVectoresDirectores();
+				String content = "OPERACION (id del avion) (empty order)";
+				content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
+				if (false) {
+					if (!eliminarAvion) {
+						// Vectores directores a los que no podemos dirigirnos
+						List<Vector> vectoresDirectoresRestringidos = new LinkedList<Vector>();
+						List<Vector> posiblesVectoresDirectores = obtenerPosiblesVectoresDirectores();
 
-					// Posicion siguiente en la que se encontraría el avion si
-					// siguiera la ruta fijada
-					Vector avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
-							avionModificado.getVectorDirector());
+						// Posicion siguiente en la que se encontraría el avion
+						// si
+						// siguiera la ruta fijada
+						Vector avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
+								avionModificado.getVectorDirector());
 
-					// Vemos las colisiones con los otros aviones
-					for (String key : aviones.keySet()) {
-						// Compruebo posibles colisiones del avion con otros
-						// aviones
-						if (!key.equals(idAvion)) {
-							// Me hago con el avion
-							Avion avion = aviones.get(key);
+						// Vemos las colisiones con los otros aviones
+						for (String key : aviones.keySet()) {
+							// Compruebo posibles colisiones del avion con otros
+							// aviones
+							if (!key.equals(idAvion)) {
+								// Me hago con el avion
+								Avion avion = aviones.get(key);
 
-							// Me hago con la posicion siguiente
-							Vector avionPosSiguiente = Vector.sum(avion.getPosicionActual(), avion.getVectorDirector());
+								// Me hago con la posicion siguiente
+								Vector avionPosSiguiente = Vector.sum(avion.getPosicionActual(),
+										avion.getVectorDirector());
 
-							//
-							if (entranEnAreaDeRiesgoDeColision(avionPosSiguiente, avionModificadoPosSiguiente)) {
-								// Añado a vectores directores restringidos el
-								// vector director actual
-								vectoresDirectoresRestringidos.add(avionModificado.getVectorDirector());
+								//
+								if (entranEnAreaDeRiesgoDeColision(avionPosSiguiente, avionModificadoPosSiguiente)) {
+									// Añado a vectores directores restringidos
+									// el
+									// vector director actual
+									vectoresDirectoresRestringidos.add(avionModificado.getVectorDirector());
 
-								// Elegir la mejor accion para evitar dicha
-								// colision
-								for (Vector posibleVector : posiblesVectoresDirectores) {
-									if (!vectoresDirectoresRestringidos.contains(posibleVector)) {
-										// Consigo la nueva posicion usando el
-										// nuevo vector director
-										avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
-												avionModificado.getVectorDirector());
+									// Elegir la mejor accion para evitar dicha
+									// colision
+									for (Vector posibleVector : posiblesVectoresDirectores) {
+										if (!vectoresDirectoresRestringidos.contains(posibleVector)) {
+											// Consigo la nueva posicion usando
+											// el
+											// nuevo vector director
+											avionModificadoPosSiguiente = Vector.sum(
+													avionModificado.getPosicionActual(),
+													avionModificado.getVectorDirector());
 
-										// Compruebo que no haya chocque
-										if (!entranEnAreaDeRiesgoDeColision(avionPosSiguiente,
-												avionModificadoPosSiguiente)) {
-											avionModificado.setVectorDirector(posibleVector);
-											vectorDirectorFinal = posibleVector;
-											break;
+											// Compruebo que no haya chocque
+											if (!entranEnAreaDeRiesgoDeColision(avionPosSiguiente,
+													avionModificadoPosSiguiente)) {
+												avionModificado.setVectorDirector(posibleVector);
+												vectorDirectorFinal = posibleVector;
+												break;
+											}
 										}
 									}
-								}
 
-								System.out.println("Vector evitar colision del avion: " + vectorDirectorFinal);
-							} else {
-								// Siga su rumbo, cambio y corto
+									System.out.println("Vector evitar colision del avion: " + vectorDirectorFinal);
+								} else {
+									// Siga su rumbo, cambio y corto
+								}
 							}
 						}
+
+						// ===============================
+						// ALGORITMO 3: LIMITES DEL MAPA
+						// ===============================
+						if (false) {
+							Vector mapaDimensiones = getDimensionesDelMapa();
+							vectorDirectorFinal = new Vector(
+									avionModificadoPosSiguiente.x < 1 ? +1
+											: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1
+													: avionModificado.getVectorDirector().x),
+									avionModificadoPosSiguiente.y < 1 ? +1
+											: (avionModificadoPosSiguiente.y > mapaDimensiones.getY() ? -1
+													: avionModificado.getVectorDirector().y),
+									0);
+
+							System.out.println("Vector limites del avion: " + vectorDirectorFinal);
+
+						}
+						// ===============================
+						// Envio la informacion al Almacen
+						// ===============================
+						content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
+					} else {
+						// ===============================
+						// Envio la informacion al Almacen
+						// ===============================
+						System.out.println("====================");
+						System.out.println("Eliminar avion!!!!!");
+						System.out.println("====================");
+						content = "0 REM " + idAvion + " " + " ";
 					}
-
-					// ===============================
-					// ALGORITMO 3: LIMITES DEL MAPA
-					// ===============================
-					if (true) {
-						Vector mapaDimensiones = getDimensionesDelMapa();
-						vectorDirectorFinal = new Vector(
-								avionModificadoPosSiguiente.x < 1 ? +1
-										: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1
-												: avionModificado.getVectorDirector().x),
-								avionModificadoPosSiguiente.y < 1 ? +1
-										: (avionModificadoPosSiguiente.y > mapaDimensiones.getY() ? -1
-												: avionModificado.getVectorDirector().y),
-								0);
-
-						System.out.println("Vector limites del avion: " + vectorDirectorFinal);
-
-					}
-					// ===============================
-					// Envio la informacion al Almacen
-					// ===============================
-					content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
-					informarAlmacenInformacion(idAvion, content);
-				} else {
-					// ===============================
-					// Envio la informacion al Almacen
-					// ===============================
-					System.out.println("====================");
-					System.out.println("Eliminar avion!!!!!");
-					System.out.println("====================");
-					content = "0 REM " + idAvion + " " + " ";
-					informarAlmacenInformacion(idAvion, content);
 				}
+				informarAlmacenInformacion(idAvion, content);
 			}
 		};
 
@@ -228,11 +239,11 @@ public class ATC extends Agent {
 	private Vector getBestDirectorVectorToPosition(Vector posOrigen, Vector posDestino) {
 		// TODO Auto-generated method stub
 		if (posOrigen.x == posDestino.x) {
-			// estan en la misma columna, voy hacia abajo o hacia arriba
-			return new Vector(posOrigen.x, posDestino.y - posOrigen.y > 0 ? 1 : -1, posOrigen.z);
+			// estan en la misma fila, voy hacia derecha o hacia izquierda
+			return new Vector(0, posDestino.y - posOrigen.y > 0 ? 1 : -1, posOrigen.z);
 		} else if (posOrigen.y == posDestino.y) {
 			// estan en la misma columna, voy hacia abajo o hacia arriba
-			return new Vector(posDestino.x - posOrigen.x > 0 ? 1 : -1, posOrigen.y, posOrigen.z);
+			return new Vector(posDestino.x - posOrigen.x > 0 ? 1 : -1, 0, posOrigen.z);
 		} else {
 			if (posDestino.x > posOrigen.x && posDestino.y > posOrigen.y) {
 				return new Vector(1, 1, 0);

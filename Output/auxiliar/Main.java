@@ -46,7 +46,7 @@ public class Main {
 
 			// Añadir un objeto al mapa (mas eventos)
 			map.addNewObjectTo(1, "Avion1", 1, 1, 0, "avion");
-			map.addNewObjectTo(2, "Pista1", 1, 2, 0, "pista");
+			map.addNewObjectTo(2, "Pista1", 10, 5, 0, "pista");
 
 			// Mover un objeto por el mapa (mas eventos)
 			// --------> No implementado aún // falta hacer esto para .dgs

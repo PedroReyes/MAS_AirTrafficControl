@@ -146,7 +146,7 @@ public class Map {
 				int zPosition = 0;
 				Node node = this.addNode(0, col, realRowInMatrixWay, zPosition);
 				this.setNodePosition(0, node, realRowInMatrixWay, realColInMatrixWay, zPosition);
-				// this.addAttribute(0, node, "ui.label", node.getId());
+				this.addAttribute(0, node, "ui.label", node.getId());
 			}
 		}
 
@@ -375,6 +375,7 @@ public class Map {
 		String edgeId = this.getEdgeIdBasedOnMapPosition(idNode1, idNode2);
 		Edge edge = this.graph.getEdge(edgeId);
 		edge = (edge == null ? this.graph.getEdge(this.getEdgeIdBasedOnMapPosition(idNode2, idNode1)) : edge);
+		System.out.println("Me quiero mover de " + point1 + " a " + point2);
 		if (edge == null)
 			throw new IllegalArgumentException(
 					"La arista por la que desea mover su objeto no existe: " + idNode1 + idNode2);

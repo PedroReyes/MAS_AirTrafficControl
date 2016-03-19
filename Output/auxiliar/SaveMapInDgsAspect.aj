@@ -49,7 +49,7 @@ public aspect SaveMapInDgsAspect {
 	// Añadir un nodo
 	pointcut addNode(Map map, int step, int posX, int posY, int posZ):
 		this(map) &&
-		call(org.graphstream.graph.Node MyExample.Map.addNode(int, int, int, int)) 
+		call(org.graphstream.graph.Node Output.auxiliar.Map.addNode(int, int, int, int)) 
 		&& args(step, posX, posY, posZ);
 
 	after(Map map, int step, int posX, int posY, int posZ) returning:
@@ -68,7 +68,7 @@ public aspect SaveMapInDgsAspect {
 	// Añadir atribudo a una arista
 	pointcut addNodeAttribute(Map map, int step, org.graphstream.graph.Node node, String attribute, String values):
 		this(map) &&
-		call(void MyExample.Map.addAttribute(int, org.graphstream.graph.Node, String, String)) 
+		call(void Output.auxiliar.Map.addAttribute(int, org.graphstream.graph.Node, String, String)) 
 		&& args(step, node, attribute, values);
 
 
@@ -85,7 +85,7 @@ public aspect SaveMapInDgsAspect {
 	// Establecer la posición de un nodo
 	pointcut setNodePosition(Map map, int step, Node node, int posX, int posY, int posZ):
 		this(map) &&
-		call(void MyExample.Map.setNodePosition(int, Node, int, int, int)) 
+		call(void Output.auxiliar.Map.setNodePosition(int, Node, int, int, int)) 
 		&& args(step, node, posX, posY, posZ);
 
 	after(Map map, int step, Node node, int posX, int posY, int posZ) returning:
@@ -102,7 +102,7 @@ public aspect SaveMapInDgsAspect {
 	// Añadir una arista
 	pointcut addEdge(Map map, int step, String id, org.graphstream.graph.Node node1, org.graphstream.graph.Node node2):
 		this(map) &&
-		call(org.graphstream.graph.Edge MyExample.Map.addEdge(int, String, org.graphstream.graph.Node, org.graphstream.graph.Node)) 
+		call(org.graphstream.graph.Edge Output.auxiliar.Map.addEdge(int, String, org.graphstream.graph.Node, org.graphstream.graph.Node)) 
 		&& args(step, id, node1, node2);
 
 
@@ -121,7 +121,7 @@ public aspect SaveMapInDgsAspect {
 	// Añadir atribudo a una arista
 	pointcut addEdgeAttribute(Map map, int step, org.graphstream.graph.Edge edge, String attribute, String values):
 		this(map) &&
-		call(void MyExample.Map.addAttribute(int, org.graphstream.graph.Edge, String, String)) 
+		call(void Output.auxiliar.Map.addAttribute(int, org.graphstream.graph.Edge, String, String)) 
 		&& args(step, edge, attribute, values);
 
 

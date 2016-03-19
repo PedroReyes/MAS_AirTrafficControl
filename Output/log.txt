@@ -1,38 +1,50 @@
 1 ADD av0 Vector{x=20,y=20,z=null} 1000.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
 1 MOD av0 Vector{x=19,y=19,z=null} 995.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-2 MOD av0 Vector{x=20,y=18,z=null} 990.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-3 MOD av0 Vector{x=19,y=17,z=null} 985.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-4 MOD av0 Vector{x=20,y=16,z=null} 980.0 5.0
+2 MOD av0 Vector{x=18,y=18,z=null} 990.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-5 MOD av0 Vector{x=19,y=15,z=null} 975.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-6 MOD av0 Vector{x=20,y=14,z=null} 970.0 5.0
+3 MOD av0 Vector{x=17,y=17,z=null} 985.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-7 MOD av0 Vector{x=19,y=13,z=null} 965.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-8 MOD av0 Vector{x=20,y=12,z=null} 960.0 5.0
+4 MOD av0 Vector{x=16,y=16,z=null} 980.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-9 MOD av0 Vector{x=19,y=11,z=null} 955.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-10 MOD av0 Vector{x=20,y=10,z=null} 950.0 5.0
+5 MOD av0 Vector{x=15,y=15,z=null} 975.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-11 MOD av0 Vector{x=19,y=9,z=null} 945.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-12 MOD av0 Vector{x=20,y=8,z=null} 940.0 5.0
+6 MOD av0 Vector{x=14,y=14,z=null} 970.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-13 MOD av0 Vector{x=19,y=7,z=null} 935.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-14 MOD av0 Vector{x=20,y=6,z=null} 930.0 5.0
+7 MOD av0 Vector{x=13,y=13,z=null} 965.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-15 MOD av0 Vector{x=19,y=5,z=null} 925.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-16 MOD av0 Vector{x=20,y=4,z=null} 920.0 5.0
+8 MOD av0 Vector{x=12,y=12,z=null} 960.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
-17 MOD av0 Vector{x=19,y=3,z=null} 915.0 5.0
-0 MOD av0 Vector{x=1,y=-1,z=0}
-18 MOD av0 Vector{x=20,y=2,z=null} 910.0 5.0
+9 MOD av0 Vector{x=11,y=11,z=null} 955.0 5.0
 0 MOD av0 Vector{x=-1,y=-1,z=0}
+10 MOD av0 Vector{x=10,y=10,z=null} 950.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+11 MOD av0 Vector{x=9,y=10,z=null} 945.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+12 MOD av0 Vector{x=10,y=9,z=null} 940.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+13 MOD av0 Vector{x=9,y=9,z=null} 935.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+14 MOD av0 Vector{x=10,y=8,z=null} 930.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+15 MOD av0 Vector{x=9,y=8,z=null} 925.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+16 MOD av0 Vector{x=10,y=7,z=null} 920.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+17 MOD av0 Vector{x=9,y=7,z=null} 915.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+18 MOD av0 Vector{x=10,y=6,z=null} 910.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+19 MOD av0 Vector{x=9,y=6,z=null} 905.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+20 MOD av0 Vector{x=10,y=5,z=null} 900.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+21 MOD av0 Vector{x=9,y=5,z=null} 895.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+22 MOD av0 Vector{x=10,y=4,z=null} 890.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
+23 MOD av0 Vector{x=9,y=4,z=null} 885.0 5.0
+0 MOD av0 Vector{x=1,y=-1,z=0}
+24 MOD av0 Vector{x=10,y=3,z=null} 880.0 5.0
+0 MOD av0 Vector{x=-1,y=0,z=0}
