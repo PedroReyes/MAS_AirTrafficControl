@@ -1,3 +1,54 @@
-1 ADD av0 Vector{x=1,y=1,z=null} 1000.0 5.0
-1 ADD av1 Vector{x=1,y=1,z=null} 1000.0 5.0
-10 ADD av2 Vector{x=1,y=1,z=null} 1000.0 5.0
+1 ADD av0 Vector{x=18,y=5,z=null} 1000.0 5.0
+1 ADD av1 Vector{x=20,y=20,z=null} 1000.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=-1,y=0,z=0}
+1 MOD av0 Vector{x=18,y=5,z=null} 995.0 5.0
+1 MOD av1 Vector{x=19,y=20,z=null} 995.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+2 MOD av0 Vector{x=18,y=5,z=null} 990.0 5.0
+2 MOD av1 Vector{x=19,y=20,z=null} 990.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+3 MOD av0 Vector{x=18,y=5,z=null} 985.0 5.0
+3 MOD av1 Vector{x=19,y=20,z=null} 985.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+4 MOD av0 Vector{x=18,y=5,z=null} 980.0 5.0
+4 MOD av1 Vector{x=19,y=20,z=null} 980.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+5 MOD av0 Vector{x=18,y=5,z=null} 975.0 5.0
+5 MOD av1 Vector{x=19,y=20,z=null} 975.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+6 MOD av0 Vector{x=18,y=5,z=null} 970.0 5.0
+6 MOD av1 Vector{x=19,y=20,z=null} 970.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+7 MOD av0 Vector{x=18,y=5,z=null} 965.0 5.0
+7 MOD av1 Vector{x=19,y=20,z=null} 965.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+8 MOD av0 Vector{x=18,y=5,z=null} 960.0 5.0
+8 MOD av1 Vector{x=19,y=20,z=null} 960.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+9 MOD av0 Vector{x=18,y=5,z=null} 955.0 5.0
+9 MOD av1 Vector{x=19,y=20,z=null} 955.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+10 ADD av2 Vector{x=10,y=20,z=null} 1000.0 5.0
+0 MOD av2 Vector{x=0,y=0,z=0}
+10 MOD av0 Vector{x=18,y=5,z=null} 950.0 5.0
+10 MOD av2 Vector{x=10,y=20,z=null} 995.0 5.0
+10 MOD av1 Vector{x=19,y=20,z=null} 950.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av2 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}
+11 MOD av0 Vector{x=18,y=5,z=null} 945.0 5.0
+11 MOD av2 Vector{x=10,y=20,z=null} 990.0 5.0
+11 MOD av1 Vector{x=19,y=20,z=null} 945.0 5.0
+0 MOD av0 Vector{x=0,y=0,z=0}
+0 MOD av2 Vector{x=0,y=0,z=0}
+0 MOD av1 Vector{x=0,y=0,z=0}

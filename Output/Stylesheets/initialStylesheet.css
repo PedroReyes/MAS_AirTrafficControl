@@ -35,28 +35,28 @@ node.vacio {
 
 node.avion{
     fill-color: red;
-    size: 50px;
+    size: 20px;
     fill-mode: image-scaled;
   fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/AvionN.png');
 }
 
 node.pista{
     fill-color: blue;
-    size: 20px;
+    size: 5px;
     fill-mode: image-scaled;
     fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/airport_runaway.png');
 }
 
 sprite.avion {
   shape: box;
-  size: 50px, 50px;
+  size: 20px, 20px;
   fill-mode: image-scaled;
   fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/AvionN.png');
 }
 
 sprite.pista {
   shape: box;
-  size: 100px, 25px;
+  size: 25px, 25px;
   fill-mode: image-scaled;
   fill-image: url('file:///Users/pedro/Dropbox/Vida_laboral/x13/ReinforcementLearningAlgorithm/Imagenes/airport_runaway.png');
 }

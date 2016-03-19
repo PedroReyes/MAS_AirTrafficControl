@@ -180,34 +180,12 @@ public class ATC extends Agent {
 					// ALGORITMO 3: LIMITES DEL MAPA
 					// ===============================
 					Vector mapaDimensiones = getDimensionesDelMapa();
-					avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
-							avionModificado.getVectorDirector());
-					if (avionModificadoPosSiguiente.x < 1) {
-						// aqui ya sabemos que tendríamos que ir a la derecha
-						if (avionModificadoPosSiguiente.y < 1) {
-							// tenemos que ir hacia abajo
-							vectorDirectorFinal = new Vector(+1, +1, 0);
-
-						} else if (avionModificadoPosSiguiente.y > mapaDimensiones.getY()) {
-							// tenemos que ir hacia arriba
-							vectorDirectorFinal = new Vector(+1, -1, 0);
-						} else {
-							// vamos a la derecha
-							vectorDirectorFinal = new Vector(+1, 0, 0);
-						}
-					} else if (avionModificadoPosSiguiente.x > mapaDimensiones.getX()) {
-						// aqui ya sabemos que tendríamos que ir a la izquierda
-						if (avionModificadoPosSiguiente.y < 1) {
-							// tenemos que ir hacia abajo
-							vectorDirectorFinal = new Vector(-1, +1, 0);
-						} else if (avionModificadoPosSiguiente.y > mapaDimensiones.getY()) {
-							// tenemos que ir hacia arriba
-							vectorDirectorFinal = new Vector(-1, -1, 0);
-						} else {
-							// vamos a la izquierda
-							vectorDirectorFinal = new Vector(-1, 0, 0);
-						}
-					}
+					vectorDirectorFinal = new Vector(
+							avionModificadoPosSiguiente.x < 1 ? +1
+									: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1 : 0),
+							avionModificadoPosSiguiente.y < 1 ? +1
+									: (avionModificadoPosSiguiente.y > mapaDimensiones.getY() ? -1 : 0),
+							0);
 
 					// ===============================
 					// Envio la informacion al Almacen
@@ -218,6 +196,9 @@ public class ATC extends Agent {
 					// ===============================
 					// Envio la informacion al Almacen
 					// ===============================
+					System.out.println("====================");
+					System.out.println("Eliminar avion!!!!!");
+					System.out.println("====================");
 					content = "0 REM " + idAvion + " " + " ";
 					informarAlmacenInformacion(idAvion, content);
 				}

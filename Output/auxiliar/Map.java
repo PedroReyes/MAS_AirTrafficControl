@@ -372,10 +372,12 @@ public class Map {
 				String.valueOf(point1.getZ()));
 		String idNode2 = this.getNodeIdBasedOnMapPosition(String.valueOf(point2.getX()), String.valueOf(point2.getY()),
 				String.valueOf(point2.getZ()));
-		Edge edge = this.graph.getEdge(this.getEdgeIdBasedOnMapPosition(idNode1, idNode2));
+		String edgeId = this.getEdgeIdBasedOnMapPosition(idNode1, idNode2);
+		Edge edge = this.graph.getEdge(edgeId);
 		edge = (edge == null ? this.graph.getEdge(this.getEdgeIdBasedOnMapPosition(idNode2, idNode1)) : edge);
 		if (edge == null)
-			throw new IllegalArgumentException("La arista por la que desea mover su objeto no existe");
+			throw new IllegalArgumentException(
+					"La arista por la que desea mover su objeto no existe: " + idNode1 + idNode2);
 
 		// Adjuntamos el sprite a la arista
 		sprite.attachToNode(idNode2);

@@ -36,7 +36,8 @@ public class InterfazGrafica extends Agent {
 
 		int nRow = getEscenario().getNumeroFilasAeropuerto();
 		int nCol = getEscenario().getNumeroColumnasAeropuerto();
-		
+		System.out.println(nRow + " : " + nCol);
+
 		aviones = new HashMap<String, Avion>();
 
 		String dgsFilePath = "";
@@ -58,8 +59,10 @@ public class InterfazGrafica extends Agent {
 			map = new Map(nRow, nCol, dgsFilePath, nameDgsFile, stylesheetFilePath, initialStylesheetName);
 			map.createMap();
 
+			int pistaN = 0;
 			for (Pista pista : getEscenario().getPistas()) {
-				map.addNewObjectTo(1, "Pista", pista.getCoordenadaX(), pista.getCoordenadaY(), 0, "pista");
+				map.addNewObjectTo(1, "Pista" + pistaN, pista.getCoordenadaX(), pista.getCoordenadaY(), 0, "pista");
+				pistaN++;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -85,38 +88,45 @@ public class InterfazGrafica extends Agent {
 	// AUXILIARY METHODS
 	// =========================================================================
 	public void actualizarInformacion(String content) {
-		String words[] = content.split(" ");
-		switch (words[1]) {
-		case "ADD":
-			String vectorADD[] = words[3].split(",");
-			map.addNewObjectTo(Integer.parseInt(words[0]), words[2], Integer.parseInt(vectorADD[0].substring(9)),
-					Integer.parseInt(vectorADD[1].substring(2)), 0, "avion");
-			aviones.put(words[2],
-					new Avion(words[2],
-							new Vector(Integer.parseInt(vectorADD[0].substring(9)),
-									Integer.parseInt(vectorADD[1].substring(2)), 0),
-							Double.parseDouble(words[4]), Double.parseDouble(words[5])));
-			break;
-		case "REM":
-			// aviones.remove(words[2]);
-			break;
-		case "MOD":
-			if (words.length != 4) { // Mensaje de Avion
-				String vectorMOD[] = words[3].split(",");
-				Avion aux = aviones.get(words[2]);
+		System.out.println("MENSAJE: " + content);
+		if (true) {
+			String words[] = content.split(" ");
+			int step = Integer.valueOf(words[0]);
+			String objectId = words[2];
+			switch (words[1]) {
+			case "ADD":
+				String vectorADD[] = words[3].split(",");
+				map.addNewObjectTo(Integer.parseInt(words[0]), words[2], Integer.parseInt(vectorADD[0].substring(9)),
+						Integer.parseInt(vectorADD[1].substring(2)), 0, "avion");
+				aviones.put(words[2],
+						new Avion(words[2],
+								new Vector(Integer.parseInt(vectorADD[0].substring(9)),
+										Integer.parseInt(vectorADD[1].substring(2)), 0),
+								Double.parseDouble(words[4]), Double.parseDouble(words[5])));
+				break;
+			case "REM":
+				// aviones.remove(words[2]);
+				break;
+			case "MOD":
+				if (words.length != 4) { // Mensaje de Avion
+					String vectorMOD[] = words[3].split(",");
+					Avion aux = aviones.get(objectId);
 
-				Vector nuevaPosicion = new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
-						Integer.parseInt(vectorMOD[1].substring(2)), 0);
-				map.moveObjectFromTo(3, words[2], aux.getPosicionActual(), nuevaPosicion, 5);
+					Vector nuevaPosicion = new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
+							Integer.parseInt(vectorMOD[1].substring(2)), 0);
+					System.out.println();
+					System.out.println(objectId + " posicion actual > " + aux.getPosicionActual());
+					map.moveObjectFromTo(step, objectId, aux.getPosicionActual(), nuevaPosicion, 5);
 
-				aux.setPosicionActual(new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
-						Integer.parseInt(vectorMOD[1].substring(2)), 0));
-				aviones.replace(words[2], aux);
+					aux.setPosicionActual(new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
+							Integer.parseInt(vectorMOD[1].substring(2)), 0));
+					aviones.replace(objectId, aux);
+				}
+				// aviones.replace(words[2], aux);
+				break;
+			default:
+				break;
 			}
-			// aviones.replace(words[2], aux);
-			break;
-		default:
-			break;
 		}
 	}
 
