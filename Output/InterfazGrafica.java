@@ -61,7 +61,7 @@ public class InterfazGrafica extends Agent {
 
 			int pistaN = 0;
 			for (Pista pista : getEscenario().getPistas()) {
-				map.addNewObjectTo(1, "Pista" + pistaN, pista.getCoordenadaY(), pista.getCoordenadaX(), 0, "pista");
+				map.addNewObjectTo(1, "Pista" + pistaN, pista.getCoordenadaX(), pista.getCoordenadaY(), 0, "pista");
 				pistaN++;
 			}
 		} catch (IOException e) {

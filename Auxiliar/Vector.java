@@ -34,6 +34,20 @@ public class Vector {
 		return new Vector(newX, newY, newZ);
 	}
 
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		Vector objVector = (Vector) obj;
+		return objVector.x == this.x && objVector.y == this.y;// &&
+																// objVector.z==this.z;
+	}
+
 	// =========================================================================
 	// ToString
 	// =========================================================================

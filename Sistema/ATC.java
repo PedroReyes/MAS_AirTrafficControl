@@ -5,6 +5,7 @@
  */
 package Sistema;
 
+import java.awt.geom.Line2D;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +25,7 @@ import jade.lang.acl.MessageTemplate;
 public class ATC extends Agent {
 
 	private HashMap<String, Avion> aviones;
+	private HashMap<String, Boolean> avionesPorPuntoEntrada;
 	private List<Pista> pistas;
 	private Vector dimensionesDelMapa;
 
@@ -34,8 +36,8 @@ public class ATC extends Agent {
 
 	// Los aviones deberan estar a una distancia prudencial los unos de los
 	// otros
-	final int riskArea = 2;
-	final int radioDelAvion = 1 + riskArea; // MINIMO EL RADIO DEL AVION DEBE
+	final int riskArea = 1;
+	final int radioDelAvion = 0 + riskArea; // MINIMO EL RADIO DEL AVION DEBE
 	// SER 1
 
 	// =========================================================================
@@ -51,6 +53,7 @@ public class ATC extends Agent {
 		// Inicializamos aviones, los aviones que se añaden iran viniendo
 		// de AlmacenDeInformacion
 		aviones = new HashMap<String, Avion>();
+		avionesPorPuntoEntrada = new HashMap<String, Boolean>();
 
 		// Que comience el trabajo de este agente...
 		CyclicBehaviour almInformacion = new CyclicBehaviour(this) {
@@ -89,7 +92,7 @@ public class ATC extends Agent {
 				Pista mejorPista = null;
 				double bestDistance = Double.MAX_VALUE;
 				for (Pista pista : pistas) {
-					Vector entrada = new Vector(pista.getCoordenadaX(), pista.getCoordenadaY(), pista.getCoordenadaX());
+					Vector entrada = new Vector(pista.getCoordenadaX(), pista.getCoordenadaY(), pista.getCoordenadaZ());
 					double auxDistance = Vector.distance(entrada, avionModificado.getPosicionActual());
 					if (auxDistance < bestDistance) {
 						bestDistance = auxDistance;
@@ -98,33 +101,45 @@ public class ATC extends Agent {
 				}
 				System.out.println("MEJOR PISTA: " + mejorPista);
 
-				// Establecemos que su vector director final es el punto de
-				// entrada de la pista mas cercana
-				if (false) {
-					Vector entrada = new Vector(mejorPista.getEntradaX(), mejorPista.getEntradaX(),
-							mejorPista.getCoordenadaX());
-					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(), entrada);
-					System.out.println("Al dirigirse a la entrada: " + vectorDirectorFinal);
-				}
+				// Entrada de la pista a la que se dirige este avion
+				Vector posEntradaPista = new Vector(mejorPista.getEntradaX(), mejorPista.getEntradaY(),
+						mejorPista.getCoordenadaZ());
 
-				// Si su posicion actual es el punto de entrada, le indicamos
-				// qeu su vector director es hacia la pista
+				// Posicion de la pista a la que se dirige este avion
 				Vector posMejorPista = new Vector(mejorPista.getCoordenadaX(), mejorPista.getCoordenadaY(),
-						mejorPista.getCoordenadaX());
-				System.out.println("Vector pista del avion: " + vectorDirectorFinal);
-				if (!avionModificado.getPosicionActual().equals(posMejorPista)) {
-					System.out.println("MODIFICADO VECTOR DIRECTOR...");
-					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(),
-							posMejorPista);
-				}
-				System.out.println("Vector pista del avion: " + vectorDirectorFinal);
+						mejorPista.getCoordenadaZ());
 
 				// Si su posicion actual es la pista de aterrizaje, lo
 				// eliminamos del mapa
 				boolean eliminarAvion = false;
-				if (avionModificado.getPosicionActual().equals(posMejorPista)) {
-					// mando mensaje para que se elimine este avion
-					eliminarAvion = true;
+
+				// Confirmamos si el avión ha pasado por el punto de entrada de
+				// la pista
+				if (avionModificado.getPosicionActual().equals(posEntradaPista)) {
+					System.out.println("I WANT TO BE FREEE!!!!");
+					avionesPorPuntoEntrada.replace(avionModificado.getID(), true);
+				}
+
+				// Establecemos que su vector director final es el punto de
+				// entrada de la pista mas cercana
+				if (!avionesPorPuntoEntrada.get(avionModificado.getID())) {
+					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(),
+							posEntradaPista);
+					System.out.println("Al dirigirse a la entrada: " + posEntradaPista);
+				} else {
+
+					// Si su posicion actual es el punto de entrada, le
+					// indicamos qeu su vector director es hacia la pista
+					System.out.println("Vector pista del avion: " + vectorDirectorFinal);
+					System.out.println("MODIFICADO VECTOR DIRECTOR...");
+					vectorDirectorFinal = getBestDirectorVectorToPosition(avionModificado.getPosicionActual(),
+							posMejorPista);
+					System.out.println("Vector pista del avion: " + posMejorPista);
+
+					if (avionModificado.getPosicionActual().equals(posMejorPista)) {
+						// mando mensaje para que se elimine este avion
+						eliminarAvion = true;
+					}
 				}
 
 				// ===============================
@@ -132,15 +147,15 @@ public class ATC extends Agent {
 				// ===============================
 				String content = "OPERACION (id del avion) (empty order)";
 				content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
-				if (false) {
-					if (!eliminarAvion) {
-						// Vectores directores a los que no podemos dirigirnos
+				if (!eliminarAvion) {
+					if (true) {
+						// Vectores directores a los que no podemos
+						// dirigirnos
 						List<Vector> vectoresDirectoresRestringidos = new LinkedList<Vector>();
 						List<Vector> posiblesVectoresDirectores = obtenerPosiblesVectoresDirectores();
 
-						// Posicion siguiente en la que se encontraría el avion
-						// si
-						// siguiera la ruta fijada
+						// Posicion siguiente en la que se encontraría el
+						// avion si siguiera la ruta fijada
 						Vector avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
 								avionModificado.getVectorDirector());
 
@@ -150,17 +165,19 @@ public class ATC extends Agent {
 							// aviones
 							if (!key.equals(idAvion)) {
 								// Me hago con el avion
-								Avion avion = aviones.get(key);
+								Avion avionAnalizado = aviones.get(key);
 
 								// Me hago con la posicion siguiente
-								Vector avionPosSiguiente = Vector.sum(avion.getPosicionActual(),
-										avion.getVectorDirector());
+								Vector avionPosSiguiente = Vector.sum(avionAnalizado.getPosicionActual(),
+										avionAnalizado.getVectorDirector());
 
 								//
-								if (entranEnAreaDeRiesgoDeColision(avionPosSiguiente, avionModificadoPosSiguiente)) {
+								// if
+								// (entranEnAreaDeRiesgoDeColision(avionPosSiguiente,
+								// avionModificadoPosSiguiente)) {
+								if (entranEnAreaDeRiesgoDeColision(avionAnalizado, avionModificado)) {
 									// Añado a vectores directores restringidos
-									// el
-									// vector director actual
+									// elvector director actual
 									vectoresDirectoresRestringidos.add(avionModificado.getVectorDirector());
 
 									// Elegir la mejor accion para evitar dicha
@@ -168,18 +185,16 @@ public class ATC extends Agent {
 									for (Vector posibleVector : posiblesVectoresDirectores) {
 										if (!vectoresDirectoresRestringidos.contains(posibleVector)) {
 											// Consigo la nueva posicion usando
-											// el
-											// nuevo vector director
-											avionModificadoPosSiguiente = Vector.sum(
-													avionModificado.getPosicionActual(),
-													avionModificado.getVectorDirector());
+											// el nuevo vector director
+											avionModificado.setVectorDirector(posibleVector);
 
 											// Compruebo que no haya chocque
-											if (!entranEnAreaDeRiesgoDeColision(avionPosSiguiente,
-													avionModificadoPosSiguiente)) {
+											if (!entranEnAreaDeRiesgoDeColision(avionAnalizado, avionModificado)) {
 												avionModificado.setVectorDirector(posibleVector);
 												vectorDirectorFinal = posibleVector;
 												break;
+											} else {
+												vectoresDirectoresRestringidos.add(posibleVector);
 											}
 										}
 									}
@@ -196,6 +211,9 @@ public class ATC extends Agent {
 						// ===============================
 						if (false) {
 							Vector mapaDimensiones = getDimensionesDelMapa();
+							avionModificadoPosSiguiente = Vector.sum(avionModificado.getPosicionActual(),
+									avionModificado.getVectorDirector());
+
 							vectorDirectorFinal = new Vector(
 									avionModificadoPosSiguiente.x < 1 ? +1
 											: (avionModificadoPosSiguiente.x > mapaDimensiones.getX() ? -1
@@ -206,21 +224,29 @@ public class ATC extends Agent {
 									0);
 
 							System.out.println("Vector limites del avion: " + vectorDirectorFinal);
-
 						}
-						// ===============================
-						// Envio la informacion al Almacen
-						// ===============================
-						content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
-					} else {
-						// ===============================
-						// Envio la informacion al Almacen
-						// ===============================
-						System.out.println("====================");
-						System.out.println("Eliminar avion!!!!!");
-						System.out.println("====================");
-						content = "0 REM " + idAvion + " " + " ";
+
 					}
+
+					// Establecemos en el mapa el vector director del avion que
+					// estamos tratando
+					avionModificado.setVectorDirector(vectorDirectorFinal);
+					aviones.replace(avionModificado.getID(), avionModificado);
+
+					// ===============================
+					// Envio la informacion al Almacen
+					// ===============================
+					content = "0 MOD " + idAvion + " " + vectorDirectorFinal;
+				} else {
+					// ===============================
+					// Envio la informacion al Almacen
+					// ===============================
+					System.out.println("====================");
+					System.out.println("Eliminar avion!!!!!");
+					System.out.println("====================");
+					content = "0 REM " + idAvion + " " + " ";
+					aviones.remove(idAvion);
+					avionesPorPuntoEntrada.remove(idAvion);
 				}
 				informarAlmacenInformacion(idAvion, content);
 			}
@@ -238,25 +264,21 @@ public class ATC extends Agent {
 	 */
 	private Vector getBestDirectorVectorToPosition(Vector posOrigen, Vector posDestino) {
 		// TODO Auto-generated method stub
-		if (posOrigen.x == posDestino.x) {
-			// estan en la misma fila, voy hacia derecha o hacia izquierda
-			return new Vector(0, posDestino.y - posOrigen.y > 0 ? 1 : -1, posOrigen.z);
-		} else if (posOrigen.y == posDestino.y) {
-			// estan en la misma columna, voy hacia abajo o hacia arriba
-			return new Vector(posDestino.x - posOrigen.x > 0 ? 1 : -1, 0, posOrigen.z);
-		} else {
-			if (posDestino.x > posOrigen.x && posDestino.y > posOrigen.y) {
-				return new Vector(1, 1, 0);
-			} else if (posDestino.x > posOrigen.x && posDestino.y < posOrigen.y) {
-				return new Vector(1, -1, 0);
-			} else if (posDestino.x < posOrigen.x && posDestino.y > posOrigen.y) {
-				return new Vector(-1, 1, 0);
-			} else if (posDestino.x < posOrigen.x && posDestino.y < posOrigen.y) {
-				return new Vector(-1, -1, 0);
-			} else {
-				throw new IllegalArgumentException("Mierda, algo no he tenido en cuenta.");
-			}
-		}
+		System.out.println("=================================");
+		System.out.print(posOrigen + " _____ " + posDestino);
+		if (posDestino.x == posOrigen.y)
+			System.out.println(" ------> X igual");
+		else if (posDestino.y == posOrigen.x)
+			System.out.println(" ------> Y igual");
+		else
+			System.out.println();
+		System.out.println("=================================");
+
+		// return new Vector(posDestino.y == posOrigen.x ? 0 : (posDestino.y >
+		// posOrigen.x ? 1 : -1),posDestino.x == posOrigen.y ? 0 : (posDestino.x
+		// > posOrigen.y ? 1 : -1), 0);
+		return new Vector(posDestino.x == posOrigen.x ? 0 : (posDestino.x > posOrigen.x ? 1 : -1),
+				posDestino.y == posOrigen.y ? 0 : (posDestino.y > posOrigen.y ? 1 : -1), 0);
 	}
 
 	/**
@@ -288,6 +310,8 @@ public class ATC extends Agent {
 							new Vector(Integer.parseInt(vector[0].substring(9)),
 									Integer.parseInt(vector[1].substring(2)), 0),
 							Double.parseDouble(words[4]), Double.parseDouble(words[5])));
+
+			avionesPorPuntoEntrada.put(words[2], false);
 			break;
 		case "MOD":
 			Avion aux = aviones.get(words[2]);
@@ -305,14 +329,29 @@ public class ATC extends Agent {
 		return words[2]; // devuelve el ID del agente
 	}
 
-	public boolean entranEnAreaDeRiesgoDeColision(Vector avion1, Vector avion2) {
-		Vector v1 = avion1;// .getPosicionActual();
-		Vector v2 = avion2;// .getPosicionActual();
+	public boolean entranEnAreaDeRiesgoDeColision(Avion avion1, Avion avion2) {
+		Vector avion1PosActual = avion1.getPosicionActual();// .getPosicionActual();
+		Vector avion2PosActual = avion2.getPosicionActual();// .getPosicionActual();
 
-		double aux = Math.pow(v1.x - v2.x, 2) + Math.pow(v1.y - v2.y, 2);
+		// Me hago con la posicion siguiente
+		Vector avion1PosSiguiente = Vector.sum(avion1.getPosicionActual(), avion1.getVectorDirector());
+		Vector avion2PosSiguiente = Vector.sum(avion2.getPosicionActual(), avion2.getVectorDirector());
 
-		return Math.pow(radioDelAvion - radioDelAvion, 2) <= aux
-				? (aux <= Math.pow(radioDelAvion + radioDelAvion, 2) ? true : false) : false;
+		double aux = Math.pow(avion1PosActual.x - avion2PosActual.x, 2)
+				+ Math.pow(avion1PosActual.y - avion2PosActual.y, 2);
+
+		// Evitar colisiones en diagonal
+		Line2D line1 = new Line2D.Float(avion1PosActual.x, avion1PosActual.y, avion1PosSiguiente.x,
+				avion1PosSiguiente.x);
+		Line2D line2 = new Line2D.Float(avion2PosActual.x, avion2PosActual.y, avion2PosSiguiente.x,
+				avion2PosSiguiente.x);
+		boolean diagonalIntersection = line2.intersectsLine(line1);
+
+		// return Math.pow(radioDelAvion - radioDelAvion, 2) <= aux? (aux <=
+		// Math.pow(radioDelAvion + radioDelAvion, 2) ? true : false) : false;
+		return avion1PosSiguiente.equals(avion2PosSiguiente)
+				|| (avion1PosSiguiente.equals(avion2PosActual) && avion2PosSiguiente.equals(avion1PosActual))
+				|| diagonalIntersection;
 	}
 
 	public void informarAlmacenInformacion(String idAvion, String content) {

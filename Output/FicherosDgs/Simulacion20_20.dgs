@@ -4168,99 +4168,169 @@ ae N1f19c1a0N2f20c1a0 f19c1a0 f20c1a0
 ce N1f19c1a0N2f20c1a0 ui.class=bordes
 st1
 
-cn f1c10a0 ui.class=pista
-cn f20c20a0 ui.class=avion
-cn f20c20a0 ui.class=vacio
-cn f19c19a0 ui.class=avion
-st2
-
-cn f19c19a0 ui.class=vacio
-cn f18c18a0 ui.class=avion
-st3
-
-cn f18c18a0 ui.class=vacio
-cn f17c17a0 ui.class=avion
-st4
-
-cn f17c17a0 ui.class=vacio
-cn f16c16a0 ui.class=avion
-st5
-
-cn f16c16a0 ui.class=vacio
-cn f15c15a0 ui.class=avion
-st6
-
-cn f15c15a0 ui.class=vacio
-cn f14c14a0 ui.class=avion
-st7
-
-cn f14c14a0 ui.class=vacio
-cn f13c13a0 ui.class=avion
-st8
-
-cn f13c13a0 ui.class=vacio
-cn f12c12a0 ui.class=avion
-st9
-
-cn f12c12a0 ui.class=vacio
-cn f11c11a0 ui.class=avion
+cn f15c2a0 ui.class=pista
+cn f1c20a0 ui.class=pista
 st10
 
-cn f11c11a0 ui.class=vacio
-cn f10c10a0 ui.class=avion
+cn f20c10a0 ui.class=avion
+cn f1c10a0 ui.class=avion
+cn f10c20a0 ui.class=avion
+cn f10c1a0 ui.class=avion
+cn f1c10a0 ui.class=vacio
+cn f1c11a0 ui.class=avion
+cn f20c10a0 ui.class=vacio
+cn f19c10a0 ui.class=avion
+cn f10c20a0 ui.class=vacio
+cn f9c19a0 ui.class=avion
+cn f10c1a0 ui.class=vacio
+cn f10c2a0 ui.class=avion
 st11
 
-cn f10c10a0 ui.class=vacio
-cn f9c10a0 ui.class=avion
+cn f1c11a0 ui.class=vacio
+cn f1c12a0 ui.class=avion
+cn f19c10a0 ui.class=vacio
+cn f18c10a0 ui.class=avion
+cn f9c19a0 ui.class=vacio
+cn f8c19a0 ui.class=avion
+cn f10c2a0 ui.class=vacio
+cn f10c3a0 ui.class=avion
 st12
 
-cn f9c10a0 ui.class=vacio
-cn f10c9a0 ui.class=avion
+cn f1c12a0 ui.class=vacio
+cn f1c13a0 ui.class=avion
+cn f18c10a0 ui.class=vacio
+cn f17c10a0 ui.class=avion
+cn f8c19a0 ui.class=vacio
+cn f7c19a0 ui.class=avion
+cn f10c3a0 ui.class=vacio
+cn f10c4a0 ui.class=avion
 st13
 
-cn f10c9a0 ui.class=vacio
-cn f9c9a0 ui.class=avion
+cn f1c13a0 ui.class=vacio
+cn f1c14a0 ui.class=avion
+cn f17c10a0 ui.class=vacio
+cn f16c10a0 ui.class=avion
+cn f7c19a0 ui.class=vacio
+cn f6c19a0 ui.class=avion
+cn f10c4a0 ui.class=vacio
+cn f10c5a0 ui.class=avion
 st14
 
-cn f9c9a0 ui.class=vacio
-cn f10c8a0 ui.class=avion
+cn f1c14a0 ui.class=vacio
+cn f1c15a0 ui.class=avion
+cn f16c10a0 ui.class=vacio
+cn f15c10a0 ui.class=avion
+cn f6c19a0 ui.class=vacio
+cn f5c19a0 ui.class=avion
+cn f10c5a0 ui.class=vacio
+cn f10c6a0 ui.class=avion
 st15
 
-cn f10c8a0 ui.class=vacio
-cn f9c8a0 ui.class=avion
+cn f1c15a0 ui.class=vacio
+cn f1c16a0 ui.class=avion
+cn f15c10a0 ui.class=vacio
+cn f14c10a0 ui.class=avion
+cn f5c19a0 ui.class=vacio
+cn f4c19a0 ui.class=avion
+cn f10c6a0 ui.class=vacio
+cn f10c7a0 ui.class=avion
 st16
 
-cn f9c8a0 ui.class=vacio
-cn f10c7a0 ui.class=avion
+cn f1c16a0 ui.class=vacio
+cn f1c17a0 ui.class=avion
+cn f14c10a0 ui.class=vacio
+cn f13c10a0 ui.class=avion
+cn f4c19a0 ui.class=vacio
+cn f3c19a0 ui.class=avion
+cn f10c7a0 ui.class=vacio
+cn f10c8a0 ui.class=avion
 st17
 
-cn f10c7a0 ui.class=vacio
-cn f9c7a0 ui.class=avion
+cn f1c17a0 ui.class=vacio
+cn f1c18a0 ui.class=avion
+cn f13c10a0 ui.class=vacio
+cn f12c10a0 ui.class=avion
+cn f3c19a0 ui.class=vacio
+cn f2c19a0 ui.class=avion
+cn f10c8a0 ui.class=vacio
+cn f10c9a0 ui.class=avion
 st18
 
-cn f9c7a0 ui.class=vacio
-cn f10c6a0 ui.class=avion
+cn f1c18a0 ui.class=vacio
+cn f1c19a0 ui.class=avion
+cn f12c10a0 ui.class=vacio
+cn f11c10a0 ui.class=avion
+cn f2c19a0 ui.class=vacio
+cn f2c18a0 ui.class=avion
+cn f10c9a0 ui.class=vacio
+cn f10c10a0 ui.class=avion
 st19
 
-cn f10c6a0 ui.class=vacio
-cn f9c6a0 ui.class=avion
+cn f1c19a0 ui.class=vacio
+cn f1c20a0 ui.class=avion
+cn f11c10a0 ui.class=vacio
+cn f11c9a0 ui.class=avion
+cn f2c18a0 ui.class=vacio
+cn f1c19a0 ui.class=avion
+cn f10c10a0 ui.class=vacio
+cn f11c9a0 ui.class=avion
 st20
 
-cn f9c6a0 ui.class=vacio
-cn f10c5a0 ui.class=avion
+cn f1c19a0 ui.class=vacio
+cn f1c20a0 ui.class=avion
+cn f11c9a0 ui.class=vacio
+cn f12c8a0 ui.class=avion
+cn f11c9a0 ui.class=vacio
+cn f12c8a0 ui.class=avion
 st21
 
-cn f10c5a0 ui.class=vacio
-cn f9c5a0 ui.class=avion
+cn f12c8a0 ui.class=vacio
+cn f11c9a0 ui.class=avion
+cn f12c8a0 ui.class=vacio
+cn f13c7a0 ui.class=avion
 st22
 
-cn f9c5a0 ui.class=vacio
-cn f10c4a0 ui.class=avion
+cn f11c9a0 ui.class=vacio
+cn f10c10a0 ui.class=avion
+cn f13c7a0 ui.class=vacio
+cn f14c6a0 ui.class=avion
 st23
 
-cn f10c4a0 ui.class=vacio
-cn f9c4a0 ui.class=avion
+cn f10c10a0 ui.class=vacio
+cn f11c9a0 ui.class=avion
+cn f14c6a0 ui.class=vacio
+cn f15c5a0 ui.class=avion
 st24
 
-cn f9c4a0 ui.class=vacio
-cn f10c3a0 ui.class=avion
+cn f11c9a0 ui.class=vacio
+cn f12c8a0 ui.class=avion
+cn f15c5a0 ui.class=vacio
+cn f15c4a0 ui.class=avion
+st25
+
+cn f12c8a0 ui.class=vacio
+cn f13c7a0 ui.class=avion
+cn f15c4a0 ui.class=vacio
+cn f15c3a0 ui.class=avion
+st26
+
+cn f13c7a0 ui.class=vacio
+cn f14c6a0 ui.class=avion
+cn f15c3a0 ui.class=vacio
+cn f15c2a0 ui.class=avion
+st27
+
+cn f14c6a0 ui.class=vacio
+cn f13c5a0 ui.class=avion
+st28
+
+cn f13c5a0 ui.class=vacio
+cn f14c4a0 ui.class=avion
+st29
+
+cn f14c4a0 ui.class=vacio
+cn f15c3a0 ui.class=avion
+st30
+
+cn f15c3a0 ui.class=vacio
+cn f15c2a0 ui.class=avion
