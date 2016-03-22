@@ -329,6 +329,13 @@ public class ATC extends Agent {
 		return words[2]; // devuelve el ID del agente
 	}
 
+	/**
+	 * Detecta si dos aviones entran en area de riesgo de colision
+	 * 
+	 * @param avion1
+	 * @param avion2
+	 * @return
+	 */
 	public boolean entranEnAreaDeRiesgoDeColision(Avion avion1, Avion avion2) {
 		Vector avion1PosActual = avion1.getPosicionActual();// .getPosicionActual();
 		Vector avion2PosActual = avion2.getPosicionActual();// .getPosicionActual();

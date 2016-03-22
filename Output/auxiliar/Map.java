@@ -394,6 +394,13 @@ public class Map {
 
 	}
 
+	public void removeObject(int timeStep, String identifier) {
+		Node attachedNode = (Node) this.spriteManager.getSprite(identifier).getAttachment();
+		String attribute = "ui.class";
+		this.addAttribute(timeStep, attachedNode, attribute, "vacio");
+		this.spriteManager.removeSprite(identifier);
+	}
+
 	public void addEmptyStep(int step) {
 
 	}

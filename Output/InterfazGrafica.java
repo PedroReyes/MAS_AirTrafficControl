@@ -105,7 +105,8 @@ public class InterfazGrafica extends Agent {
 								Double.parseDouble(words[4]), Double.parseDouble(words[5])));
 				break;
 			case "REM":
-				// aviones.remove(words[2]);
+				map.removeObject(step, objectId);
+				aviones.remove(objectId);
 				break;
 			case "MOD":
 				if (words.length != 4) { // Mensaje de Avion
@@ -122,7 +123,6 @@ public class InterfazGrafica extends Agent {
 							Integer.parseInt(vectorMOD[1].substring(2)), 0));
 					aviones.replace(objectId, aux);
 				}
-				// aviones.replace(words[2], aux);
 				break;
 			default:
 				break;

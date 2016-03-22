@@ -37,7 +37,7 @@ public class Main {
 		// Ejecutar main normal
 		// =======================
 		// para ejecutar una simulación primero se ha debido correr el programa
-		boolean ejecutarSimulacion = false;
+		boolean ejecutarSimulacion = true;
 		long speedness = 1000;
 		if (!ejecutarSimulacion) {
 			// Creamos el mapa
@@ -52,12 +52,15 @@ public class Main {
 			// --------> No implementado aún // falta hacer esto para .dgs
 			map.moveObjectFromTo(3, "Avion1", new Vector(1, 1, 0), new Vector(2, 2, 0), 5);
 			Thread.sleep(speedness);
-			map.moveObjectFromTo(4, "Avion1", new Vector(2, 2, 0), new Vector(3, 3, 0), 5);
+			map.moveObjectFromTo(8, "Avion1", new Vector(2, 2, 0), new Vector(3, 3, 0), 5);
 			Thread.sleep(speedness);
-			map.moveObjectFromTo(5, "Avion1", new Vector(3, 3, 0), new Vector(2, 2, 0), 5);
+			map.moveObjectFromTo(10, "Avion1", new Vector(3, 3, 0), new Vector(2, 2, 0), 5);
 			Thread.sleep(speedness);
-			map.moveObjectFromTo(6, "Avion1", new Vector(2, 2, 0), new Vector(1, 1, 0), 5);
+			map.moveObjectFromTo(12, "Avion1", new Vector(2, 2, 0), new Vector(1, 1, 0), 5);
 			Thread.sleep(speedness);
+
+			// map.re
+			map.removeObject(16, "Avion1");
 
 			System.out.println("END");
 		} else {

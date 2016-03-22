@@ -996,15 +996,18 @@ st3
 
 cn f1c1a0 ui.class=vacio
 cn f2c2a0 ui.class=avion
-st4
+st8
 
 cn f2c2a0 ui.class=vacio
 cn f3c3a0 ui.class=avion
-st5
+st10
 
 cn f3c3a0 ui.class=vacio
 cn f2c2a0 ui.class=avion
-st6
+st12
 
 cn f2c2a0 ui.class=vacio
 cn f1c1a0 ui.class=avion
+st16
+
+cn f1c1a0 ui.class=vacio
