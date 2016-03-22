@@ -13,8 +13,8 @@ public class Main {
 		// un archivo .dgs que es el que se ejecuta posteriormente en la
 		// simulación)
 		// ===============================
-		int nRow = 10;
-		int nCol = 10;
+		int nRow = 20;
+		int nCol = 20;
 
 		// Se indica el fichero donde se salvará la simulación así como el
 		// estilo de la ejecución
@@ -37,7 +37,7 @@ public class Main {
 		// Ejecutar main normal
 		// =======================
 		// para ejecutar una simulación primero se ha debido correr el programa
-		boolean ejecutarSimulacion = true;
+		boolean ejecutarSimulacion = false;
 		long speedness = 1000;
 		if (!ejecutarSimulacion) {
 			// Creamos el mapa
@@ -54,9 +54,9 @@ public class Main {
 			Thread.sleep(speedness);
 			map.moveObjectFromTo(8, "Avion1", new Vector(2, 2, 0), new Vector(3, 3, 0), 5);
 			Thread.sleep(speedness);
-			map.moveObjectFromTo(10, "Avion1", new Vector(3, 3, 0), new Vector(2, 2, 0), 5);
+			map.moveObjectFromTo(10, "Avion1", new Vector(3, 3, 0), new Vector(3, 3, 0), 5);
 			Thread.sleep(speedness);
-			map.moveObjectFromTo(12, "Avion1", new Vector(2, 2, 0), new Vector(1, 1, 0), 5);
+			map.moveObjectFromTo(12, "Avion1", new Vector(3, 3, 0), new Vector(3, 3, 0), 5);
 			Thread.sleep(speedness);
 
 			// map.re

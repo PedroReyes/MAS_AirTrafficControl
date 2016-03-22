@@ -97,7 +97,7 @@ public class Avion extends Agent {
 	// AUXILIARY METHODS
 	// =========================================================================
 	public void actualizarInformacion(String content) {
-		System.out.println("AVN: Recibe: " + content);
+		// System.out.println("AVN: Recibe: " + content);
 		String words[] = content.split(" ");
 		switch (words[1]) {
 		case "MOD":

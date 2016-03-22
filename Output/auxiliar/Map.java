@@ -72,9 +72,7 @@ public class Map {
 	}
 
 	/**
-	 * Una vez se llama a este metodo el mapa comienza a funcionar y podemos
-	 * añadir acciones sobre el utilizando el metodo executeActionOnMap(String
-	 * action)
+	 * Una vez se llama a este metodo el mapa comienza a funcionar y podemos añadir acciones sobre el utilizando el metodo executeActionOnMap(String action)
 	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -146,7 +144,7 @@ public class Map {
 				int zPosition = 0;
 				Node node = this.addNode(0, col, realRowInMatrixWay, zPosition);
 				this.setNodePosition(0, node, realRowInMatrixWay, realColInMatrixWay, zPosition);
-				this.addAttribute(0, node, "ui.label", node.getId());
+				// this.addAttribute(0, node, "ui.label", node.getId());
 			}
 		}
 
@@ -212,8 +210,7 @@ public class Map {
 	}
 
 	/**
-	 * Crea el fichero DGS que sera en ultima instancia la fuente de las
-	 * acciones que se veran reflejadas sobre el grafo.
+	 * Crea el fichero DGS que sera en ultima instancia la fuente de las acciones que se veran reflejadas sobre el grafo.
 	 * 
 	 * @param nameDgsFile
 	 */
@@ -312,8 +309,7 @@ public class Map {
 	}
 
 	/**
-	 * Los nodos tendrán un id que vendrá dada siempre por su posición en el
-	 * mapa
+	 * Los nodos tendrán un id que vendrá dada siempre por su posición en el mapa
 	 * 
 	 * @param posX
 	 * @return
@@ -324,8 +320,7 @@ public class Map {
 	}
 
 	/**
-	 * Las aristas tendrán un id que vendrá dada siempre por la union de los ids
-	 * de los nodos del mapa
+	 * Las aristas tendrán un id que vendrá dada siempre por la union de los ids de los nodos del mapa
 	 * 
 	 * @param posX
 	 * @return
@@ -336,8 +331,7 @@ public class Map {
 	}
 
 	/**
-	 * Añade un nuevo objeto al mapa, concretamente adjunta dich objeto a un
-	 * nodo del mapa
+	 * Añade un nuevo objeto al mapa, concretamente adjunta dich objeto a un nodo del mapa
 	 * 
 	 * @param objectId
 	 */
@@ -364,34 +358,35 @@ public class Map {
 
 	public void moveObjectFromTo(int step, String objectId, Vector point1, Vector point2, int totalStepTime) {
 		// TODO Auto-generated method stub
-		// Conseguimos el sprite/objeto
-		Sprite sprite = this.spriteManager.getSprite(objectId);
+		if (!point1.equals(point2)) {
+			// Conseguimos el sprite/objeto
+			Sprite sprite = this.spriteManager.getSprite(objectId);
 
-		// Conseguimos la arista a través de la cual se va a mover el objeto
-		String idNode1 = this.getNodeIdBasedOnMapPosition(String.valueOf(point1.getX()), String.valueOf(point1.getY()),
-				String.valueOf(point1.getZ()));
-		String idNode2 = this.getNodeIdBasedOnMapPosition(String.valueOf(point2.getX()), String.valueOf(point2.getY()),
-				String.valueOf(point2.getZ()));
-		String edgeId = this.getEdgeIdBasedOnMapPosition(idNode1, idNode2);
-		Edge edge = this.graph.getEdge(edgeId);
-		edge = (edge == null ? this.graph.getEdge(this.getEdgeIdBasedOnMapPosition(idNode2, idNode1)) : edge);
-		System.out.println("Me quiero mover de " + point1 + " a " + point2);
-		if (edge == null)
-			throw new IllegalArgumentException(
-					"La arista por la que desea mover su objeto no existe: " + idNode1 + idNode2);
+			// Conseguimos la arista a través de la cual se va a mover el objeto
+			String idNode1 = this.getNodeIdBasedOnMapPosition(String.valueOf(point1.getX()),
+					String.valueOf(point1.getY()), String.valueOf(point1.getZ()));
+			String idNode2 = this.getNodeIdBasedOnMapPosition(String.valueOf(point2.getX()),
+					String.valueOf(point2.getY()), String.valueOf(point2.getZ()));
+			String edgeId = this.getEdgeIdBasedOnMapPosition(idNode1, idNode2);
+			Edge edge = this.graph.getEdge(edgeId);
+			edge = (edge == null ? this.graph.getEdge(this.getEdgeIdBasedOnMapPosition(idNode2, idNode1)) : edge);
+			// System.out.println("Me quiero mover de " + point1 + " a " + point2);
+			if (edge == null)
+				throw new IllegalArgumentException(
+						"La arista por la que desea mover su objeto no existe: " + idNode1 + idNode2);
 
-		// Adjuntamos el sprite a la arista
-		sprite.attachToNode(idNode2);
+			// Adjuntamos el sprite a la arista
+			sprite.attachToNode(idNode2);
 
-		// Añadimos el sentencia que se ejecutara en la simulación para este
-		// evento
-		Node sourceNode = this.graph.getNode(idNode1);
-		Node targetNode = this.graph.getNode(idNode2);
-		String attribute = "ui.class";
-		String values = sprite.getAttribute(attribute);
-		this.addAttribute(step, sourceNode, attribute, "vacio");
-		this.addAttribute(step, targetNode, attribute, values);
-
+			// Añadimos el sentencia que se ejecutara en la simulación para este
+			// evento
+			Node sourceNode = this.graph.getNode(idNode1);
+			Node targetNode = this.graph.getNode(idNode2);
+			String attribute = "ui.class";
+			String values = sprite.getAttribute(attribute);
+			this.addAttribute(step, sourceNode, attribute, "vacio");
+			this.addAttribute(step, targetNode, attribute, values);
+		}
 	}
 
 	public void removeObject(int timeStep, String identifier) {

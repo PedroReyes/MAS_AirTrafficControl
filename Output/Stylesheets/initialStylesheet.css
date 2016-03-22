@@ -6,11 +6,11 @@ edge {
     fill-mode: dyn-plain;
     fill-color: #222, #555, green, yellow;
     size: 1px;
-    visibility-mode: normal;
+    visibility-mode: hidden;
 }
 
 edge.invisibles{
-    visibility-mode: normal;
+    visibility-mode: hidden;
 }
 
 edge.bordes{

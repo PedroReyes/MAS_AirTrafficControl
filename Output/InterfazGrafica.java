@@ -115,8 +115,9 @@ public class InterfazGrafica extends Agent {
 
 					Vector nuevaPosicion = new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
 							Integer.parseInt(vectorMOD[1].substring(2)), 0);
-					System.out.println();
-					System.out.println(objectId + " posicion actual > " + aux.getPosicionActual());
+					// System.out.println();
+					// System.out.println(objectId + " posicion actual > " +
+					// aux.getPosicionActual());
 					map.moveObjectFromTo(step, objectId, aux.getPosicionActual(), nuevaPosicion, 5);
 
 					aux.setPosicionActual(new Vector(Integer.parseInt(vectorMOD[0].substring(9)),
