@@ -337,28 +337,21 @@ public class ATC extends Agent {
 	 * @return
 	 */
 	public boolean entranEnAreaDeRiesgoDeColision(Avion avion1, Avion avion2) {
-		Vector avion1PosActual = avion1.getPosicionActual();// .getPosicionActual();
-		Vector avion2PosActual = avion2.getPosicionActual();// .getPosicionActual();
+		Vector avion1PosActual = avion1.getPosicionActual();
+		Vector avion2PosActual = avion2.getPosicionActual();
 
 		// Me hago con la posicion siguiente
 		Vector avion1PosSiguiente = Vector.sum(avion1.getPosicionActual(), avion1.getVectorDirector());
 		Vector avion2PosSiguiente = Vector.sum(avion2.getPosicionActual(), avion2.getVectorDirector());
 
-		double aux = Math.pow(avion1PosActual.x - avion2PosActual.x, 2)
-				+ Math.pow(avion1PosActual.y - avion2PosActual.y, 2);
+		double avion1AvgPosX = (avion1PosActual.x + avion1PosSiguiente.x)/2;
+		double avion1AvgPosY = (avion1PosActual.y + avion1PosSiguiente.y)/2;
 
-		// Evitar colisiones en diagonal
-		Line2D line1 = new Line2D.Float(avion1PosActual.x, avion1PosActual.y, avion1PosSiguiente.x,
-				avion1PosSiguiente.x);
-		Line2D line2 = new Line2D.Float(avion2PosActual.x, avion2PosActual.y, avion2PosSiguiente.x,
-				avion2PosSiguiente.x);
-		boolean diagonalIntersection = line2.intersectsLine(line1);
+		double avion2AvgPosX = (avion2PosActual.x + avion2PosSiguiente.x)/2;
+		double avion2AvgPosY = (avion2PosActual.y + avion2PosSiguiente.y)/2;
 
-		// return Math.pow(radioDelAvion - radioDelAvion, 2) <= aux? (aux <=
-		// Math.pow(radioDelAvion + radioDelAvion, 2) ? true : false) : false;
 		return avion1PosSiguiente.equals(avion2PosSiguiente)
-				|| (avion1PosSiguiente.equals(avion2PosActual) && avion2PosSiguiente.equals(avion1PosActual))
-				|| diagonalIntersection;
+				|| (avion1AvgPosX == avion2AvgPosX && avion1AvgPosY == avion2AvgPosY);  
 	}
 
 	public void informarAlmacenInformacion(String idAvion, String content) {
